@@ -1,0 +1,1 @@
+Displays the details of a specific appointment, including patient and doctor information, date, time, and any notes.
