@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordControlle;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,7 +29,25 @@ Route::post('/logout', function () {
 // Route::post('/register', [RegisterController::class, 'register'])->name('register');
 // admin dashboard
     //manage doctors
-Route::view('admin', 'dashboard.index')->name('maindashboard');//main doctor and reception dashboard 
+
+// Route::middleware(['auth', 'role:admin'])->get('/admin/dashboard', [AdminController::class, 'dashboard']);
+// Route::middleware(['auth', 'role:doctor'])->get('/doctor/dashboard', [DoctorController::class, 'dashboard']);
+// Route::middleware(['auth', 'role:patient'])->get('/patient/dashboard', [PatientController::class, 'dashboard']);
+Route::view('/admin/dashboard', 'dashboard.admin')->name('admin.dashboard');
+Route::view('/patient/dashboard', 'dashboard.patient')->name('patient.dashboard');
+Route::view('/doctor/dashboard', 'dashboard.doctor')->name('doctor.dashboard');
+Route::get('auth/google/callback', [SocialiteController::class, 'googleCallback'])->name('auth.google.callback');
+Route::get('auth/google', [SocialiteController::class, 'googleLogin'])->name('auth.google');
+
+//forgot password
+Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// Reset Password Route
+Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
 Route::view('doctors', 'admin.doctors.index')->name('doctors');//  patient dashboard
 Route::view('show', 'admin.doctors.show')->name('show');//  show doctor details
 Route::view('edit', 'admin.doctors.edit')->name('edit');//  edit doctor details
