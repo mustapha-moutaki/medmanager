@@ -123,7 +123,7 @@
                     <div class="mb-6">
                         <div class="flex items-center justify-between mb-2">
                             <label class="block text-sm font-medium text-gray-700" for="password">Password</label>
-                            <a href="#" class="text-sm text-indigo-600 hover:text-indigo-500 transition duration-200">Forgot password?</a>
+                            <a href="{{ route('password.request')}}" class="text-sm text-indigo-600 hover:text-indigo-500 transition duration-200">Forgot password?</a>
                         </div>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
