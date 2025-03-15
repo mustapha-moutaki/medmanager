@@ -27,7 +27,7 @@
                 <p class="text-gray-500 mb-8">Enter your email address and we'll send you a link to reset your password.</p>
                 
                 <form method="POST" action="{{ route('password.email') }}">
-                    @csrf
+                @csrf
                     
                     <div class="mb-6">
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>

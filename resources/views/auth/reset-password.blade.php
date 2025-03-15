@@ -34,9 +34,10 @@
                         </div>
                     @endif
                     
-                    <form action="{{ route('password.update') }}" method="POST">
+                    <form method="POST" action="{{ route('password.update') }}">
                         @csrf
                         <input type="hidden" name="token" value="{{ $token }}">
+                        
                         <div class="mb-5">
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                             <div class="relative">

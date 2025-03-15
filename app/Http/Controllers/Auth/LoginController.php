@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 class LoginController extends Controller
@@ -28,7 +28,7 @@ class LoginController extends Controller
     // Attempt to log the user in
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         // Authentication successful
-        return redirect()->intended(route('maindashboard'));
+        return redirect()->intended(route('admin.dashboard'));
     } else {
         // Authentication failed
         return back()->with('error', 'Invalid email or password')->withInput();

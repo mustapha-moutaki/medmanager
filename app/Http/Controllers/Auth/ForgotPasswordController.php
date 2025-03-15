@@ -1,42 +1,27 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {
-    public function showLinkRequestForm($token=null)
+    public function showLinkRequestForm()
     {
-        return view('auth.forgot-password', compact('token'));
+        return view('auth.forgot-password');
     }
 
-    public function sendResetLink(Request $request)
+    public function sendResetLinkEmail(Request $request)
     {
-        // Validate email input
-        $request->validate(['email' => 'required|email|exists:users,email']);
+        $request->validate([
+            'email' => 'required|email',
+        ]);
 
-        // Generate a reset token
-        $token = Str::random(60);
+        $status = Password::sendResetLink($request->only('email'));
 
-        // Find the user and update the reset token
-        $user = User::where('email', $request->email)->first();
-        $user->reset_pass_token = $token;
-        dd($user);
-        die();
-        $user->save();
-
-        // Send the reset link to the user's email
-        Mail::send('auth.reset-password', ['token' => $token], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Reset Your Password');
-        });
-
-        // Return with success message
-        return back()->with('success', 'A reset link has been sent to your email.');
+        return $status === Password::RESET_LINK_SENT
+            ? back()->with(['status' => __($status)])
+            : back()->withErrors(['email' => __($status)]);
     }
 }
