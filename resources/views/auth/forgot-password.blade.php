@@ -26,9 +26,33 @@
                 <h1 class="text-3xl font-bold text-gray-800 mb-2">Forgot Password?</h1>
                 <p class="text-gray-500 mb-8">Enter your email address and we'll send you a link to reset your password.</p>
                 
-                <form method="POST" action="{{ route('password.email') }}">
-                @csrf
-                    
+                <!-- Success Message Display -->
+                @if (session('status'))
+                <div id="success-message" class="text-center py-8">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+                        <i class="fas fa-check text-green-500 text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Check Your Email</h2>
+                    <p class="text-gray-600 mb-4">We've sent a password reset link to:</p>
+                    <p class="text-blue-600 font-medium mb-6">{{ session('email', 'your email address') }}</p>
+                    <p class="text-sm text-gray-500">Didn't receive an email? Check your spam folder or 
+                        <a href="{{ route('password.forgot') }}" class="text-blue-600 hover:underline">try again</a>
+                    </p>
+                </div>
+                @endif
+
+                <!-- Error Message For Email Not Found -->
+                @if (session('error'))
+                <div class="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block sm:inline"> {{ session('error') }}</span>
+                </div>
+                @endif
+                
+                <!-- Only show form if no success message -->
+                @if (!session('status'))
+                <form method="POST" action="{{ route('password.forgot.post') }}" id="forgot-form">
+                    @csrf
                     <div class="mb-6">
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                         <div class="relative">
@@ -43,20 +67,21 @@
                             <p class="mt-1 text-sm text-red-600">{{ $errors->first('email') }}</p>
                         @endif
                     </div>
-                    
+
                     <div class="mb-6">
-                        <button type="submit"
+                        <button type="submit" id="submit-btn"
                             class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 font-medium">
                             Send Reset Link
                         </button>
                     </div>
-                    
+
                     <div class="text-center">
                         <a href="{{ route('login') }}" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center transition duration-200">
                             <i class="fas fa-arrow-left mr-2 text-sm"></i> Back to Login
                         </a>
                     </div>
                 </form>
+                @endif
             </div>
             
             <!-- Bottom Decoration -->
@@ -127,79 +152,21 @@
     <script>      
 document.addEventListener('DOMContentLoaded', function() {
     // Get the form and button elements
-    const form = document.querySelector('form');
+    const form = document.getElementById('forgot-form');
+    if (!form) return; // Exit if form doesn't exist (success state)
+    
     const submitButton = form.querySelector('button[type="submit"]');
     
     // Add event listener to the form
-    form.addEventListener('submit', function(event) {
-        // Prevent the default form submission
-        event.preventDefault();
-        
+    form.addEventListener('submit', function() {
         // Change button text to show loading state
         submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
         submitButton.disabled = true;
         
-        // Get the email input value
-        const emailInput = document.getElementById('email');
-        const emailValue = emailInput.value;
-        
-        // Validate email (simple validation)
-        if (!emailValue || !emailValue.includes('@')) {
-            // Show error
-            if (!document.querySelector('.email-error')) {
-                const errorMessage = document.createElement('p');
-                errorMessage.className = 'mt-1 text-sm text-red-600 email-error';
-                errorMessage.textContent = 'Please enter a valid email address';
-                emailInput.parentNode.appendChild(errorMessage);
-            }
-            
-            // Reset button
-            submitButton.innerHTML = 'Send Reset Link';
-            submitButton.disabled = false;
-            return;
-        }
-        
-        // Simulate API call (you would replace this with your actual form submission)
-        setTimeout(function() {
-            // Hide the form
-            form.style.opacity = '0';
-            form.style.height = '0';
-            form.style.overflow = 'hidden';
-            form.style.transition = 'all 0.5s ease';
-            
-            // Create success message
-            const successMessage = document.createElement('div');
-            successMessage.className = 'text-center py-8';
-            successMessage.innerHTML = `
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                    <i class="fas fa-check text-green-500 text-2xl"></i>
-                </div>
-                <h2 class="text-2xl font-bold text-gray-800 mb-2">Check Your Email</h2>
-                <p class="text-gray-600 mb-4">We've sent a password reset link to:</p>
-                <p class="text-blue-600 font-medium mb-6">${emailValue}</p>
-                <p class="text-sm text-gray-500">Didn't receive an email? Check your spam folder or <button id="resendBtn" class="text-blue-600 hover:underline">resend the link</button></p>
-            `;
-            
-            // Insert the success message where the form was
-            form.parentNode.insertBefore(successMessage, form);
-            
-            // Add event listener to resend button
-            document.getElementById('resendBtn').addEventListener('click', function() {
-                this.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Sending...';
-                this.disabled = true;
-                
-                // Simulate resending
-                setTimeout(() => {
-                    this.innerHTML = 'Link resent!';
-                    this.className = 'text-green-600 hover:underline';
-                }, 1500);
-            });
-            
-        }, 1500);
+        // Let the form submit naturally to the server
+        return true;
     });
 });
-
     </script>
 </body>
-
 </html>

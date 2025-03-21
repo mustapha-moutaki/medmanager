@@ -1,239 +1,197 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <h2 class="text-3xl font-bold mb-8 text-center text-blue-600">Patient Details</h2>
-
-</div>
-
-
-<div class="flex-1 flex flex-col overflow-hidden bg-gradient-to-r from-blue-500 to-blue-300 p-2 rounded-lg">
-<!-- <div class="flex-1 flex flex-col overflow-hidden bg-white shadow-lg border border-gray-200 p-4 rounded-lg"> -->
-
-    <!-- Patient Profile -->
-    <main class="flex-1 overflow-y-auto bg-white rounded-lg shadow-sm p-6">
-        <div class="flex space-x-4 mb-6">
-            <div class="flex items-center space-x-3 bg-white rounded-lg p-4 shadow-sm flex-1">
-                <div class="rounded-full overflow-hidden w-12 h-12">
-                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jane Doe" class="w-full h-full object-cover">
-                </div>
-                <div>
-                    <h2 class="text-lg font-semibold">Jane Doe</h2>
-                    <p class="text-gray-500 text-sm">Diabetes Type II</p>
-                </div>
-            </div>
-            <button class="bg-white p-3 rounded-lg shadow-sm">
-                <i class="fas fa-video text-blue-600"></i>
-            </button>
-            <button class="bg-white p-3 rounded-lg shadow-sm">
-                <i class="fas fa-phone-alt text-blue-600"></i>
-            </button>
-        </div>
-        
-        <div class="grid grid-cols-2 gap-6">
-            <!-- Patient Info -->
-            <div class="bg-white rounded-lg shadow-sm p-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <p class="text-gray-500 text-sm">Date of Birth</p>
-                        <p class="font-medium">Jan. 15, 1985</p>
+    <div class="flex-1 flex flex-col overflow-hidden bg-gradient-to-r from-blue-500 to-blue-300 p-4">
+        <!-- Patient Profile -->
+        <main class="flex-1 overflow-y-auto bg-white rounded-lg shadow-sm p-6">
+            <div class="flex space-x-4 mb-6">
+                <div class="flex items-center space-x-3 bg-white rounded-lg p-4 shadow-sm flex-1">
+                    <div class="rounded-full overflow-hidden w-12 h-12">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jane Doe" class="w-full h-full object-cover">
                     </div>
                     <div>
-                        <p class="text-gray-500 text-sm">Address</p>
-                        <p class="font-medium">123 Main St, Anytown, USA</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-500 text-sm">Marital Status</p>
-                        <p class="font-medium">Married</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-500 text-sm">Insurance</p>
-                        <p class="font-medium">HealthPlus Insurance</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-500 text-sm">Social Number</p>
-                        <p class="font-medium">123-45-6789</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-500 text-sm">Phone Number</p>
-                        <p class="font-medium">(555) 123-4567</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-500 text-sm">Gender</p>
-                        <p class="font-medium">Female</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-500 text-sm">Registered On</p>
-                        <p class="font-medium">Feb 10, 2020</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-500 text-sm">Patient Type</p>
-                        <p class="font-medium">Outpatient</p>
+                        <h2 class="text-lg font-semibold">Jane Doe</h2>
+                        <p class="text-gray-500 text-sm">Diabetes Type II</p>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Documents -->
-            <div class="bg-white rounded-lg shadow-sm p-4">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-semibold">Documents</h3>
-                    <button class="flex items-center space-x-1 text-blue-600 text-sm">
-                        <i class="fas fa-plus"></i>
-                        <span>Add files</span>
-                    </button>
-                </div>
-                
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <div class="flex items-center space-x-2">
-                            <i class="far fa-file-pdf text-gray-600"></i>
-                            <span>Blood Test Results.pdf</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <button class="text-gray-500">
-                                <i class="fas fa-download"></i>
-                            </button>
-                            <button class="text-gray-500">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <div class="flex items-center space-x-2">
-                            <i class="far fa-file-pdf text-gray-600"></i>
-                            <span>Prescription.pdf</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <button class="text-gray-500">
-                                <i class="fas fa-download"></i>
-                            </button>
-                            <button class="text-gray-500">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Medical Records -->
-        <div class="mt-6 bg-white rounded-lg shadow-sm p-4">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-semibold">Medical Records</h3>
-                <button class="flex items-center space-x-1 text-blue-600 text-sm">
-                    <i class="fas fa-plus"></i>
-                    <span>Add record</span>
+                <button class="bg-white p-3 rounded-lg shadow-sm">
+                    <i class="fas fa-video text-blue-600"></i>
+                </button>
+                <button class="bg-white p-3 rounded-lg shadow-sm">
+                    <i class="fas fa-phone-alt text-blue-600"></i>
                 </button>
             </div>
             
-            <div class="space-y-4">
-                <div class="flex justify-between items-center border-b pb-4">
-                    <div class="grid grid-cols-5 gap-4 flex-1">
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Patient Info -->
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <p class="text-gray-500 text-sm">Date</p>
-                            <p class="font-medium">Mar 01, 2023</p>
+                            <p class="text-gray-500 text-sm">Date of Birth</p>
+                            <p class="font-medium">Jan. 15, 1985</p>
                         </div>
                         <div>
-                            <p class="text-gray-500 text-sm">Symptoms</p>
-                            <p class="font-medium">Fatigue, Thirst</p>
+                            <p class="text-gray-500 text-sm">Address</p>
+                            <p class="font-medium">123 Main St, Anytown, USA</p>
                         </div>
                         <div>
-                            <p class="text-gray-500 text-sm">Specialist</p>
-                            <p class="font-medium">Dr. John Smith</p>
+                            <p class="text-gray-500 text-sm">Marital Status</p>
+                            <p class="font-medium">Married</p>
                         </div>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <button class="text-gray-500">
-                            <i class="fas fa-download"></i>
-                        </button>
-                        <button class="text-gray-500">
-                            <i class="fas fa-ellipsis-v"></i>
-                        </button>
+                        <div>
+                            <p class="text-gray-500 text-sm">Insurance</p>
+                            <p class="font-medium">HealthPlus Insurance</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Social Number</p>
+                            <p class="font-medium">123-45-6789</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Phone Number</p>
+                            <p class="font-medium">(555) 123-4567</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Gender</p>
+                            <p class="font-medium">Female</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Registered On</p>
+                            <p class="font-medium">Feb 10, 2020</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="mt-4 text-center">
-                <button class="text-gray-500">See all</button>
-            </div>
-        </div>
-        
-        <!-- Appointments -->
-        <div class="mt-6 bg-white rounded-lg shadow-sm p-4">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-semibold">Upcoming Appointments</h3>
-            </div>
-            
-            <div class="space-y-4">
-                <div class="flex items-start space-x-4 border-b pb-4">
-                    <div class="flex flex-col items-center justify-center bg-indigo-100 rounded-lg px-2 py-3">
-                        <span class="text-indigo-800 font-semibold">15</span>
-                        <span class="text-xs text-indigo-600">Tue</span>
+                
+                <!-- Documents -->
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-semibold">Documents</h3>
+                        <button class="flex items-center space-x-1 text-blue-600 text-sm">
+                            <i class="fas fa-plus"></i>
+                            <span>Add files</span>
+                        </button>
                     </div>
                     
-                    <div class="grid grid-cols-4 gap-4 flex-1">
-                        <div>
-                            <p class="text-gray-500 text-sm">Date</p>
-                            <p class="font-medium">Mar 15, 2023</p>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center border-b pb-3">
+                            <div class="flex items-center space-x-2">
+                                <i class="far fa-file-pdf text-gray-600"></i>
+                                <span>Blood Test Results.pdf</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="text-gray-500">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="text-gray-500">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Symptoms</p>
-                            <p class="font-medium">Regular Checkup</p>
+                        <div class="flex justify-between items-center border-b pb-3">
+                            <div class="flex items-center space-x-2">
+                                <i class="far fa-file-pdf text-gray-600"></i>
+                                <span>Prescription.pdf</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="text-gray-500">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="text-gray-500">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Category</p>
-                            <p class="font-medium">Routine</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Doctor</p>
-                            <p class="font-medium">Dr. Lisa White</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col items-end space-y-2">
-                        <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Confirmed</span>
-                        <button class="text-gray-500">
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Assigned Staff -->
-        <div class="mt-6 bg-white rounded-lg shadow-sm p-4">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-semibold">Assigned Healthcare Staff</h3>
             </div>
             
-            <div class="space-y-4">
-                <div class="flex justify-between items-center border-b pb-4">
-                    <div class="grid grid-cols-5 gap-4 flex-1">
-                        <div>
-                            <p class="text-gray-500 text-sm">Doctor</p>
-                            <p class="font-medium">Dr. Sarah Johnson</p>
+            <!-- Medical Records -->
+            <div class="mt-6 bg-white rounded-lg shadow-sm p-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-semibold">Medical Records</h3>
+                    <button class="flex items-center space-x-1 text-blue-600 text-sm">
+                        <i class="fas fa-plus"></i>
+                        <span>Add record</span>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center border-b pb-4">
+                        <div class="grid grid-cols-5 gap-4 flex-1">
+                            <div>
+                                <p class="text-gray-500 text-sm">Date</p>
+                                <p class="font-medium">Mar 01, 2023</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Symptoms</p>
+                                <p class="font-medium">Fatigue, Thirst</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Specialist</p>
+                                <p class="font-medium">Dr. John Smith</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Specialty</p>
-                            <p class="font-medium">Cardiology</p>
+                        <div class="flex items-center space-x-2">
+                            <button class="text-gray-500">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="text-gray-500">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
                         </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Nurse</p>
-                            <p class="font-medium">Emily Smith</p>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <button class="text-gray-500">See all</button>
+                </div>
+            </div>
+            
+            <!-- Appointments -->
+            <div class="mt-6 bg-white rounded-lg shadow-sm p-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-semibold">Upcoming Appointments</h3>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-4 border-b pb-4">
+                        <div class="flex flex-col items-center justify-center bg-indigo-100 rounded-lg px-2 py-3">
+                            <span class="text-indigo-800 font-semibold">15</span>
+                            <span class="text-xs text-indigo-600">Tue</span>
                         </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Contact</p>
-                            <p class="font-medium">(987) 654-3210</p>
+                        
+                        <div class="grid grid-cols-4 gap-4 flex-1">
+                            <div>
+                                <p class="text-gray-500 text-sm">Date</p>
+                                <p class="font-medium">Mar 15, 2023</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Symptoms</p>
+                                <p class="font-medium">Regular Checkup</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Category</p>
+                                <p class="font-medium">Routine</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Doctor</p>
+                                <p class="font-medium">Dr. Lisa White</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col items-end space-y-2">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Confirmed</span>
+                            <button class="text-gray-500">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-</div>
+        </main>
+    </div>
 
 
-<div class="flex-1 flex flex-col overflow-hidden bg-blue-300 p-2 rounded-lg mt-14">
+    <div class="flex-1 flex flex-col overflow-hidden bg-gradient-to-r from-blue-500 to-blue-300 p-4">
         <!-- Patient Profile -->
         <main class="flex-1 overflow-y-auto bg-white rounded-lg shadow-sm p-6">
             <!-- Existing Patient Info Sections -->
