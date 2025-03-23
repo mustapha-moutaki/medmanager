@@ -1,6 +1,8 @@
 <?php
 
+use App\Mail\testMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\UserController;
@@ -14,7 +16,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // Route::resource('formations', FormationController::class);
@@ -69,10 +71,10 @@ Route::get('auth/google/callback', [SocialiteController::class, 'googleCallback'
 Route::get('auth/google', [SocialiteController::class, 'googleLogin'])->name('auth.google');
 
 
-Route::get('forgot-password', [ForgotPasswordController::class, 'forgotPasswordForm'])
+Route::get('forgot-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])
     ->name('password.forgot');
     
-Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPasswordFormPost'])
+Route::post('forgot-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])
     ->name('password.forgot.post');
 
 // Reset Password Routes
@@ -143,3 +145,11 @@ Route::middleware([RoleMiddleware::class . ':patient'])->group(function () {
 // Route::middleware([RoleMiddleware::class . ':User'])->group(function () {
 //     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 // });
+Route::get("/mail",function (){
+    try{
+        Mail::to("jawadboulmal@gmail.com")->send(new testMail());
+        return "hello";
+    }catch(\Exception $e){
+        return $e->getMessage();
+    }
+});
