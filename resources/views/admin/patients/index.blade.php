@@ -2,26 +2,33 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-<div class="mb-4 flex space-x-4 justify-between">
-    <h2 class="text-xl font-bold mb-4">Patients List</h2>
+<div class="mb-4 flex space-x-4 justify-between items-center">
+    <h2 class="text-xl font-bold">Patients List</h2>
    
-    <form action="#" method="GET" class="flex items-center">
-        <select name="gender" class="border border-gray-300 rounded-md p-2">
-            <option value="">All Genders</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-        </select>
-    
-        <select name="condition" class="border border-gray-300 rounded-md p-2">
-            <option value="">All Conditions</option>
-            <option value="hypertension">Hypertension</option>
-            <option value="diabetes">Diabetes</option>
-            <option value="asthma">Asthma</option>
-            <!-- Add more conditions as needed -->
-        </select>
+    <div class="flex items-center space-x-4">
+        <a href="{{route('patient.create')}}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow flex items-center transition duration-300">
+            <i class="fas fa-user-plus mr-2"></i>
+            Add New Patient
+        </a>
         
-        <button type="submit" class="bg-blue-600 text-white rounded-md py-2 px-4">Filter</button>
-    </form>
+        <form action="#" method="GET" class="flex items-center space-x-2">
+            <select name="gender" class="border border-gray-300 rounded-md p-2">
+                <option value="">All Genders</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        
+            <select name="condition" class="border border-gray-300 rounded-md p-2">
+                <option value="">All Conditions</option>
+                <option value="hypertension">Hypertension</option>
+                <option value="diabetes">Diabetes</option>
+                <option value="asthma">Asthma</option>
+                <!-- Add more conditions as needed -->
+            </select>
+            
+            <button type="submit" class="bg-blue-600 text-white rounded-md py-2 px-4">Filter</button>
+        </form>
+    </div>
 </div>
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
@@ -42,10 +49,10 @@
                     <td class="py-2 px-4 border-b">Hypertension</td>
                     <td class="py-2 px-4 border-b">
                         <div class="flex justify-start space-x-3">
-                            <a href="#" class="text-blue-500 hover:text-blue-700">
+                            <a href="{{route('patient.show')}}" class="text-blue-500 hover:text-blue-700">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="#" class="text-green-500 hover:text-green-700">
+                            <a href="{{route('patient.edit')}}" class="text-green-500 hover:text-green-700">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form action="#" method="POST" class="inline">
