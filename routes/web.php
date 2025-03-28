@@ -7,14 +7,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\StaffController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\DoctorController;
 Route::get('/', function () {
     return view('home');
 });
@@ -98,8 +99,7 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])
 Route::middleware(['role:admin'])->group(function () {
 
     Route::get('doctors', [DoctorController::class, 'index'])->name('doctors');
-});
-// Route::view('show', 'admin.doctors.show')->name('doctor.show');//  show doctor details
+    // Route::view('show', 'admin.doctors.show')->name('doctor.show');//  show doctor details
 Route::get('doctor/{id}', [DoctorController::class, 'show'])->name('admin.doctors.show');
 
 // Route::view('edit', 'admin.doctors.edit')->name('doctor.edit');//  edit doctor details
@@ -110,6 +110,8 @@ Route::put('doctor/{id}', [DoctorController::class, 'update'])->name('doctor.upd
 Route::view('create/doctor', 'admin.doctors.create')->name('create.doctor');//  screate a doctor
 Route::post('doctors', [DoctorController::class, 'store'])->name('doctor.store');
 Route::delete('doctor/{id}', [DoctorController::class, 'destroy'])->name('doctor.destroy');
+});
+
 
 
     //manage patient
@@ -117,11 +119,19 @@ Route::view('patients', 'admin.patients.index')->name('patients-list');
 Route::view('patients/show', 'admin.patients.show')->name('patient.show');
 Route::view('patients/edit', 'admin.patients.edit')->name('patient.edit');
 Route::view('patients/create', 'admin.patients.create')->name('patient.create');
+
     //stuffs
-Route::view('stuffs', 'admin.stuffs.index')->name('stuffs');
-Route::view('stuffs/create', 'admin.stuffs.create')->name('stuff.create');
-Route::view('stuffs/edit', 'admin.stuffs.edit')->name('stuff.edit');
-Route::view('stuffs/show', 'admin.stuffs.show')->name('stuff.show');
+// Route::view('staffs', 'admin.staffs.index')->name('stuffs');
+// Route::view('staff/create', 'admin.staffs.create')->name('stuff.create');
+// Route::view('staff/edit', 'admin.staffs.edit')->name('stuff.edit');
+// Route::view('stuff/show', 'admin.staffs.show')->name('stuff.show');
+// Route::resource('staffs', StaffController::class);
+Route::get('staffs', [StaffController::class, 'index'])->name('stuffs');
+Route::get('staff/create', [StaffController::class, 'create'])->name('stuff.create');
+Route::post('doctors', [DoctorController::class, 'store'])->name('staff.store');
+Route::get('staff/edit', [StaffController::class, 'edit'])->name('stuff.edit');
+Route::get('staff/show', [StaffController::class, 'show'])->name('stuff.show');
+
 
 Route::view('patients/billing', 'admin.billings.show')->name('patientbillingshow');
 

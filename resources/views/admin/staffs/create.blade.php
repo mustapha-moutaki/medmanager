@@ -11,7 +11,7 @@
             <p class="text-indigo-100 mt-1">Complete the form below to register a new nursing professional</p>
         </div>
 
-        <form action="" method="POST" enctype="multipart/form-data" class="p-6">
+        <form action="{{ route('staff.store') }}" method="POST" enctype="multipart/form-data" class="p-6">
             @csrf
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -76,7 +76,7 @@
                             <label for="dob" class="block text-sm font-medium text-gray-700 mb-1">
                                 <i class="fas fa-birthday-cake mr-2 text-blue-500"></i>Date of Birth
                             </label>
-                            <input type="date" name="dob" id="dob" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <input type="date" name="birth_date" id="dob" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                         
                         <!-- Gender -->
@@ -88,7 +88,6 @@
                                 <option value="">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
-                                <option value="other">Other</option>
                             </select>
                         </div>
                     </div>
@@ -107,6 +106,20 @@
                     <div class="border-b border-gray-200 mb-4"></div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Role -->
+                        <div>
+                            <label for="role" class="block text-sm font-medium text-gray-700 mb-1">
+                                <i class="fas fa-user-tag mr-2 text-green-500"></i>Role
+                            </label>
+                            <select name="role" id="role" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
+                                <option value="">Select Role</option>
+                                <option value="nurse">Nurse</option>
+                                <option value="receptionist">Receptionist</option>
+                                <option value="technician">Technician</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
                         <!-- Specialization -->
                         <div>
                             <label for="specialization" class="block text-sm font-medium text-gray-700 mb-1">
@@ -153,9 +166,9 @@
                         <!-- Certifications -->
                         <div class="md:col-span-2">
                             <label for="certifications" class="block text-sm font-medium text-gray-700 mb-1">
-                                <i class="fas fa-certificate mr-2 text-green-500"></i>Certifications
+                                <i class="fas fa-certificate mr-2 text-green-500"></i>Certification
                             </label>
-                            <input type="text" name="certifications" id="certifications" placeholder="BLS, ACLS, PALS, etc." class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            <input type="text" name="certifications" id="certifications" placeholder="Ex: BLS, ACLS, PALS." class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                         </div>
                     </div>
                 </div>
@@ -203,14 +216,6 @@
                             </select>
                         </div>
                         
-                        <!-- Join Date -->
-                        <div>
-                            <label for="join_date" class="block text-sm font-medium text-gray-700 mb-1">
-                                <i class="fas fa-calendar-plus mr-2 text-amber-500"></i>Join Date
-                            </label>
-                            <input type="date" name="join_date" id="join_date" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent">
-                        </div>
-                        
                         <!-- Shift Preference -->
                         <div>
                             <label for="shift_preference" class="block text-sm font-medium text-gray-700 mb-1">
@@ -251,30 +256,8 @@
                         </div>
                     </div>
                     
-                    <!-- Educational Background -->
-                    <div class="mb-4">
-                        <label for="education" class="block text-sm font-medium text-gray-700 mb-1">
-                            <i class="fas fa-graduation-cap mr-2 text-purple-500"></i>Educational Background
-                        </label>
-                        <input type="text" name="education" id="education" placeholder="University of Nursing, BSN" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                    </div>
-
-                    <!-- Languages Spoken -->
-                    <div class="mb-4">
-                        <label for="languages" class="block text-sm font-medium text-gray-700 mb-1">
-                            <i class="fas fa-language mr-2 text-purple-500"></i>Languages Spoken
-                        </label>
-                        <input type="text" name="languages" id="languages" placeholder="English, Spanish, etc." class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                    </div>
-                    
                     <!-- Emergency Contact -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="emergency_contact_name" class="block text-sm font-medium text-gray-700 mb-1">
-                                <i class="fas fa-exclamation-circle mr-2 text-purple-500"></i>Emergency Contact Name
-                            </label>
-                            <input type="text" name="emergency_contact_name" id="emergency_contact_name" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                        </div>
                         <div>
                             <label for="emergency_contact_phone" class="block text-sm font-medium text-gray-700 mb-1">
                                 <i class="fas fa-phone mr-2 text-purple-500"></i>Emergency Contact Phone

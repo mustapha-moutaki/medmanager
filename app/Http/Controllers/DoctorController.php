@@ -42,40 +42,40 @@ class DoctorController extends Controller
 
 public function store(StoreDoctorRequest $request){
 
-$user = new User();
-$user->first_name = $request->first_name;
-$user->last_name = $request->last_name;
-$user->email = $request->email;
-$user->password = Hash::make($request->password);
-$user->phone = $request->phone;
-$user->age = $request->age;
-$user->gender = $request->gender;
-$user->address = $request->address;
-$user->CIN = $request->CIN;
+        $user = new User();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->phone = $request->phone;
+        $user->age = $request->age;
+        $user->gender = $request->gender;
+        $user->address = $request->address;
+        $user->CIN = $request->CIN;
 
-//here we fix that problem
-$user->birth_date = $request->birth_date;
-$user->bio = $request->bio;
+        //here we fix that problem
+        $user->birth_date = $request->birth_date;
+        $user->bio = $request->bio;
 
-// this code is not work
-if ($request->hasFile('profile_photo')) {
-    $imagePath = $request->file('profile_photo')->store('public/doctor_images');
-    $user->profile_photo = $imagePath;
-}
-
-
-$user->save();
+        // this code is not work
+        if ($request->hasFile('profile_photo')) {
+            $imagePath = $request->file('profile_photo')->store('public/doctor_images');
+            $user->profile_photo = $imagePath;
+        }
 
 
-$doctor = new Doctor();
-    $doctor->user_id = $user->id;
-    $doctor->specialist = $request->specialist;
-    $doctor->yearsOfExperience = $request->yearsOfExperience;
-    $doctor->emergency_contact_phone = $request->emergency_contact_phone;
-    $doctor->certificate = $request->certificate;
-$doctor->save();
+        $user->save();
 
-return redirect()->route('doctors')->with('success', 'doctor added successfully');
+
+        $doctor = new Doctor();
+            $doctor->user_id = $user->id;
+            $doctor->specialist = $request->specialist;
+            $doctor->yearsOfExperience = $request->yearsOfExperience;
+            $doctor->emergency_contact_phone = $request->emergency_contact_phone;
+            $doctor->certificate = $request->certificate;
+        $doctor->save();
+
+        return redirect()->route('doctors')->with('success', 'doctor added successfully');
 }
 
     /**
