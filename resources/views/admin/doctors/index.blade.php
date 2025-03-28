@@ -35,7 +35,7 @@
                 <i class="fas fa-user-md text-white text-xl mr-2"></i>
                 <h2 class="text-sm font-bold text-white">Specialist Profile</h2>
             </div>
-            
+        
             <div class="p-4 text-center">
                 <div class="mb-3">
                     <img src="{{ $doctor->profile_image ?? '/images/doctor1.jpg' }}" 
