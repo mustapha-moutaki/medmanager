@@ -14,7 +14,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-
+use App\Http\Controllers\DoctorController;
 Route::get('/', function () {
     return view('home');
 });
@@ -96,13 +96,21 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])
 // });
 // Route::view('doctors', 'admin.doctors.index')->name('doctors');//  list doctors dashboard
 Route::middleware(['role:admin'])->group(function () {
-    Route::view('doctors', 'admin.doctors.index')->name('doctors');
+
+    Route::get('doctors', [DoctorController::class, 'index'])->name('doctors');
 });
+// Route::view('show', 'admin.doctors.show')->name('doctor.show');//  show doctor details
+Route::get('doctor/{id}', [DoctorController::class, 'show'])->name('admin.doctors.show');
+
+// Route::view('edit', 'admin.doctors.edit')->name('doctor.edit');//  edit doctor details
+Route::get('/doctors/{id}/edit', [DoctorController::class, 'edit'])->name('doctor.edit');
+Route::put('doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update');
 
 
-Route::view('show', 'admin.doctors.show')->name('doctor.show');//  show doctor details
-Route::view('edit', 'admin.doctors.edit')->name('doctor.edit');//  edit doctor details
 Route::view('create/doctor', 'admin.doctors.create')->name('create.doctor');//  screate a doctor
+Route::post('doctors', [DoctorController::class, 'store'])->name('doctor.store');
+Route::delete('doctor/{id}', [DoctorController::class, 'destroy'])->name('doctor.destroy');
+
 
     //manage patient
 Route::view('patients', 'admin.patients.index')->name('patients-list');

@@ -8,8 +8,8 @@
         </div>
 
         <div class="p-6 text-center">
-            <img src="/images/doctor1.jpg" alt="Dr. Emily Rodriguez" class="w-32 h-32 rounded-full mx-auto object-cover border-2 border-blue-500 mb-4">
-            <h3 class="text-lg font-semibold text-gray-800">Dr. Emily Rodriguez</h3>
+            <img src="/images/doctor1.jpg" alt="Dr. {{ $doctor->user->first_name }} {{ $doctor->user->last_name }}" class="w-32 h-32 rounded-full mx-auto object-cover border-2 border-blue-500 mb-4">
+            <h3 class="text-lg font-semibold text-gray-800">Dr. {{ $doctor->user->first_name }} {{ $doctor->user->last_name }}</h3>
         </div>
 
         <div class="p-6">
@@ -22,19 +22,19 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h4 class="text-xs text-gray-500">First Name</h4>
-                        <p class="text-sm font-bold text-gray-800">Emily</p>
+                        <p class="text-sm font-bold text-gray-800">{{ $doctor->user->first_name }}</p>
                     </div>
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h4 class="text-xs text-gray-500">Last Name</h4>
-                        <p class="text-sm font-bold text-gray-800">Rodriguez</p>
+                        <p class="text-sm font-bold text-gray-800">{{ $doctor->user->last_name }}</p>
                     </div>
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h4 class="text-xs text-gray-500">Birthdate</h4>
-                        <p class="text-sm font-bold text-gray-800">January 15, 1985</p>
+                        {{ $doctor->user->birth_date ? \Carbon\Carbon::parse($doctor->user->birth_date)->format('d/m/Y') : 'birath dath is not available ' }}
                     </div>
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h4 class="text-xs text-gray-500">Gender</h4>
-                        <p class="text-sm font-bold text-gray-800">Female</p>
+                        <p class="text-sm font-bold text-gray-800">{{ $doctor->user->gender }}</p>
                     </div>
                 </div>
             </div>
@@ -48,11 +48,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h4 class="text-xs text-gray-500">Phone Number</h4>
-                        <p class="text-sm font-bold text-gray-800">(123) 456-7890</p>
+                        <p class="text-sm font-bold text-gray-800">{{ $doctor->user->phone }}</p>
                     </div>
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h4 class="text-xs text-gray-500">Email</h4>
-                        <p class="text-sm font-bold text-gray-800">emily.rodriguez@example.com</p>
+                        <p class="text-sm font-bold text-gray-800">{{ $doctor->user->email }}</p>
                     </div>
                 </div>
             </div>
@@ -66,11 +66,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h4 class="text-xs text-gray-500">Specialty</h4>
-                        <p class="text-sm font-bold text-gray-800">Cardiology</p>
+                        <p class="text-sm font-bold text-gray-800">{{ $doctor->specialist }}</p>
                     </div>
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h4 class="text-xs text-gray-500">Years of Experience</h4>
-                        <p class="text-sm font-bold text-gray-800">12 Years</p>
+                        <p class="text-sm font-bold text-gray-800">{{ $doctor->yearsOfExperience }}</p>
                     </div>
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h4 class="text-xs text-gray-500">Patients Treated</h4>
