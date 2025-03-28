@@ -50,8 +50,9 @@
                 <div class="flex justify-center items-center mb-3">
                     <i class="fas fa-stethoscope text-blue-500 mr-1"></i>
                     <p class="text-sm text-gray-600">{{ $doctor->specialist }}</p>
-                     <i class="fas fa-baby text-pink-500 mr-1"></i>
+                   
                     @if($doctor->pediatrics)
+                    <i class="fas fa-baby text-pink-500 mr-1"></i>
                         <i class="fas fa-brain text-green-500 mr-1"></i>
                     @endif
                 </div>

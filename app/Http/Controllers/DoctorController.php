@@ -18,6 +18,14 @@ class DoctorController extends Controller
     {
         $doctors = Doctor::with('user')->get();
         return view('admin.doctors.index', compact('doctors'));
+
+        $doctor = Doctor::with('patients') // Eager load patients to optimize query
+        ->findOrFail($id);
+    
+        return view('doctors.show', [
+            'doctor' => $doctor,
+            'patientCount' => $doctor->patients()->count()
+        ]);
     }
 
     /**
