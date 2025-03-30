@@ -120,7 +120,8 @@ public function store(StoreDoctorRequest $request){
             'patients_treated' => 'sometimes|integer|min:0',
             'certificates' => 'nullable|string|max:1000',
             'bio' => 'nullable|string|max:2000',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'CIN' => 'sometimes|string|max:20'
         ]);
     
         // Handle photo upload
@@ -140,6 +141,7 @@ public function store(StoreDoctorRequest $request){
             'phone' => $validatedData['phone'],
             'email' => $validatedData['email'],
             'bio' => $validatedData['bio'] ?? null,
+            'CIN' => 'sometimes|string|max:20',
             'profile_photo' => $validatedData['profile_photo'] ?? $doctor->user->profile_photo
         ]);
     

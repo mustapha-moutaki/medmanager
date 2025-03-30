@@ -128,9 +128,11 @@ Route::view('patients/create', 'admin.patients.create')->name('patient.create');
 // Route::resource('staffs', StaffController::class);
 Route::get('staffs', [StaffController::class, 'index'])->name('stuffs');
 Route::get('staff/create', [StaffController::class, 'create'])->name('stuff.create');
-Route::post('doctors', [DoctorController::class, 'store'])->name('staff.store');
-Route::get('staff/edit', [StaffController::class, 'edit'])->name('stuff.edit');
-Route::get('staff/show', [StaffController::class, 'show'])->name('stuff.show');
+Route::post('staff', [StaffController::class, 'store'])->name('staff.store');
+Route::get('staff/{id}/edit', [StaffController::class, 'edit'])->name('stuff.edit');
+Route::put('staff/{id}/update', [StaffController::class, 'update'])->name('staff.update');
+Route::get('staff/show/{id}', [StaffController::class, 'show'])->name('stuff.show');
+Route::delete('staff/{id}', [StaffController::class, 'destroy'])->name('stuff.delete');
 
 
 Route::view('patients/billing', 'admin.billings.show')->name('patientbillingshow');

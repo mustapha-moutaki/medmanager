@@ -29,6 +29,7 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        @if($doctors && $doctors->count() > 0)
         @foreach($doctors as $doctor)
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="bg-blue-800 p-3 flex items-center">
@@ -38,9 +39,16 @@
         
             <div class="p-4 text-center">
                 <div class="mb-3">
-                    <img src="{{ $doctor->profile_image ?? '/images/doctor1.jpg' }}" 
-                         alt="Dr. {{ $doctor->user->first_name }} {{ $doctor->user->last_name }}" 
-                         class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500">
+                @if($doctor->user->gender == 'male')
+    <img src="{{ $doctor->user->profile_image ? $doctor->user->profile_image : 'https://i.pinimg.com/736x/a4/65/fa/a465facd516872128b2129177ca4c354.jpg' }}" 
+         alt="Dr. {{ $doctor->user->first_name }} {{ $doctor->user->last_name }}" 
+         class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500">
+@else
+    <img src="{{ $doctor->user->profile_image ? $doctor->user->profile_image : 'https://i.pinimg.com/736x/41/bd/fc/41bdfcf77b854da843f843ccf594b3cf.jpg' }}" 
+         alt="Dr. {{ $doctor->user->first_name }} {{ $doctor->user->last_name }}" 
+         class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500">
+@endif
+
                 </div>
                 
                 <h3 class="text-lg font-semibold text-gray-800 mb-1">
@@ -89,6 +97,11 @@
             </div>
         </div>
         @endforeach
+        @else
+        <div class="col-span-1 sm:col-span-2 lg:col-span-3 bg-gray-100 text-center p-5 rounded-lg border border-gray-300">
+            <p class="text-lg text-gray-600">No doctors available</p>
+        </div>
+        @endif
     </div>
 </div>
 @endsection
