@@ -5,7 +5,9 @@
                 <i class="fas fa-user-md text-white text-sm"></i>
             </div>
             <div>
-                <div class="text-sm font-medium text-gray-700">Dr. Smith</div>
+            <div class="text-sm font-medium text-gray-700">
+            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+        </div>
                 <div class="text-xs text-gray-500">Medical Director</div>
             </div>
         </div>

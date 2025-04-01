@@ -6,7 +6,9 @@ use App\Repositories\StaffRepository;
 use App\Services\forgetPasswordService;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\ForgetPasswordRepository;
+use App\Repositories\Interfaces\patientRepositoryInterface;
 use App\Repositories\Interfaces\StaffRepositoryInterface;
+use App\Repositories\patientRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
 
             StaffRepositoryInterface::class;
             StaffRepository::class;
+
+            patientRepositoryInterface::class;
+            patientRepository::class;
 
         });
 
