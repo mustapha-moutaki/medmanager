@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use id;
 use Log;
 use App\Models\User;
+use App\Models\Staff;
+use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Document;
 use Illuminate\Http\Request;
@@ -18,18 +20,48 @@ class PatientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $patients = Patient::with('user', 'documents')->get();
-        return view('admin.patients.index', compact('patients'));
+    // public function index()
+    // {
+    //     $patients = Patient::with('user', 'documents')->get();
+      
+    //     return view('admin.patients.index', compact('patients'));
+    // }
+
+    public function index(Request $request)
+{
+    $query = Patient::query();
+
+    if ($request->has('gender') && $request->gender !== '') {
+        $query->whereHas('user', function($q) use ($request) {
+            $q->where('gender', $request->gender);
+        });
     }
+
+    if ($request->has('search') && $request->search !== '') {
+        $query->whereHas('user', function($q) use ($request) {
+            $q->where('first_name', 'like', '%' . $request->search . '%')
+              ->orWhere('last_name', 'like', '%' . $request->search . '%');
+        });
+    }
+
+    $patients = $query->get();
+
+    if ($request->ajax()) {
+        return view('patients.partials.patient-table', compact('patients'));
+    }
+
+    return view('admin.patients.index', compact('patients'));
+}
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('admin.patients.create');
+        $doctors = Doctor::all();
+        $nurses = Staff::where('role', 'nurse')->get();
+        return view('admin.patients.create', compact('doctors', 'nurses'));
     }
 
     /**
@@ -69,6 +101,9 @@ class PatientController extends Controller
         $patient->patient_type = $request->patient_type;
         $patient->registration_date = now();
         $patient->extra_phone_number = $request->extra_phone_number;
+
+        $patient->doctor_id = $request->doctor_id;
+        $patient->nurse_id = $request->nurse_id; 
         $patient->save();
     
        // Handle document uploads

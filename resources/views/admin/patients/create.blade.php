@@ -94,7 +94,35 @@
                         <option value="widowed">Widowed</option>
                     </select>
                 </div>
+
+                    <!-- assign doctor-->
+
+                <div class="mb-4">
+                    <label for="doctor_id" class="block text-gray-700">Assign Doctor</label>
+                    <select name="doctor_id" id="doctor_id" class="border border-gray-300 rounded-md p-2 w-full">
+                        <option value="" disabled selected>Select a Doctor</option>
+                        @foreach($doctors as $doctor)
+                            <option value="{{ $doctor->id }}">DR.{{ $doctor->user->first_name }} {{ $doctor->user->last_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- assign nurse-->
+
+                    <div class="mb-4">
+                <label for="nurse_id" class="block text-gray-700">Assign Nurse</label>
+                <select name="nurse_id" id="nurse_id" class="border border-gray-300 rounded-md p-2 w-full">
+                    <option value="">Select a Nurse</option>
+                    @foreach($nurses as $nurse)
+                        <option value="{{ $nurse->id }}">{{ $nurse->user->first_name }} {{ $nurse->user->last_name }}</option>
+                    @endforeach
+                </select>
             </div>
+                    </div>
+
+
+             
+
 
             <!-- Contact Information -->
             <div class="flex flex-col space-y-6">
@@ -156,7 +184,7 @@
                 </div>
             </div>
         </div>
-
+    
         <!-- Documents Section -->
         <div class="p-6 border-t border-gray-200">
             <div class="flex items-center space-x-2 mb-4">
@@ -172,16 +200,16 @@
 
             <input type="file" id="document-upload" name="documents[]" multiple class="hidden" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
             <div id="uploaded-documents" class="space-y-4">
-    <!-- Uploaded documents will be displayed here -->
-</div>
-<p class="text-red-500">
-    <i>Please make sure that all documents are combined into a single PDF file before uploading. Accepted file types: .pdf, .doc, .docx, .jpg, .jpeg, .png.</i>
-</p>
+                <!-- Uploaded documents will be displayed here -->
+            </div>
+            <p class="text-red-500">
+                <i>Please make sure that all documents are combined into a single PDF file before uploading. Accepted file types: .pdf, .doc, .docx, .jpg, .jpeg, .png.</i>
+            </p>
             <div class="flex space-x-4">
                 <button type="submit" form="patient-form" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200">
                     Save Patient
                 </button>
-                <a href="#" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition duration-200">
+                <a href="{{ route('patients-list') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition duration-200">
                     Cancel
                 </a>
             </div>

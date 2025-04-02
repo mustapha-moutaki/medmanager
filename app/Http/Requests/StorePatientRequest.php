@@ -45,6 +45,10 @@ class StorePatientRequest extends FormRequest
             // Document uploads
             'documents' => 'nullable|array',
             'documents.*' => 'file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
+
+            // Nurse and doctor assignments
+            'doctor_id' => 'required|exists:doctors,id',
+            'nurse_id' => 'required|exists:staff,id',
         ];
     }
 }
