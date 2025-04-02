@@ -225,29 +225,26 @@ class PatientController extends Controller
     public function destroy($id)
     {
         try {
-            // Find the patient
+         
             $patient = Patient::with('documents')->findOrFail($id);
             
-            // Delete associated documents
             foreach ($patient->documents as $document) {
                 Storage::disk('public')->delete($document->file_path);
                 $document->delete();
             }
             
-            // Optional: Delete associated user if you want to remove user record too
+           
             if ($patient->user) {
                 $patient->user->delete();
             }
-            
-            // Delete the patient
+        
             $patient->delete();
 
-            // Redirect with success message
-            return redirect()->route('patients')
+            return redirect()->route('patients-list')
                 ->with('success', 'Patient and all associated documents deleted successfully');
         } catch (\Exception $e) {
-            // Handle potential errors
-            return redirect()->route('patients')
+            
+            return redirect()->route('patients-list')
                 ->with('error', 'Unable to delete patient: ' . $e->getMessage());
         }
     }

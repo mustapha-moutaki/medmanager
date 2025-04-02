@@ -57,13 +57,13 @@
                         </td>
                         <td class="py-1 px-2 border-b">
                             <div class="flex justify-start space-x-2">
-                                <a href="" class="text-blue-500 hover:text-blue-700">
+                                <a href="{{ route('patient.show' ,$patient->id)}}" class="text-blue-500 hover:text-blue-700">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="" class="text-green-500 hover:text-green-700">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="" method="POST" class="inline">
+                                <form action="{{route('patient.delete', $patient->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this patient?');" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-500 hover:text-red-700">

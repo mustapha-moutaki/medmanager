@@ -15,11 +15,11 @@
         <div class="flex space-x-4 mb-6">
             <div class="flex items-center space-x-3 bg-white rounded-lg p-4 shadow-sm flex-1">
                 <div class="rounded-full overflow-hidden w-12 h-12">
-                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jane Doe" class="w-full h-full object-cover">
-                </div>
+                <img src="{{ $patient->user->profile_photo ? asset('storage/' . $patient->user->profile_photo) : 'https://randomuser.me/api/portraits/women/65.jpg' }}" alt="{{ $patient->user->first_name }}" class="w-full h-full object-cover">
+                 </div>
                 <div>
-                    <h2 class="text-lg font-semibold">Jane Doe</h2>
-                    <p class="text-gray-500 text-sm">Diabetes Type II</p>
+                    <h2 class="text-lg font-semibold">{{$patient->user->first_name . ' '. $patient->user->last_name}}</h2>
+                    <p class="text-gray-500 text-sm">{{ $patient->patient_type}}</p>
                 </div>
             </div>
             <button class="bg-white p-3 rounded-lg shadow-sm">
@@ -36,84 +36,88 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <p class="text-gray-500 text-sm">Date of Birth</p>
-                        <p class="font-medium">Jan. 15, 1985</p>
+                        <p class="font-medium">{{ \Carbon\Carbon::parse($patient->user->birth_date)->format('d/M/Y') }}</p>
+
                     </div>
                     <div>
                         <p class="text-gray-500 text-sm">Address</p>
-                        <p class="font-medium">123 Main St, Anytown, USA</p>
+                        <p class="font-medium">{{ $patient->user->address}}</p>
                     </div>
                     <div>
                         <p class="text-gray-500 text-sm">Marital Status</p>
-                        <p class="font-medium">Married</p>
+                        <p class="font-medium">{{$patient->marital_status}}</p>
                     </div>
                     <div>
                         <p class="text-gray-500 text-sm">Insurance</p>
-                        <p class="font-medium">HealthPlus Insurance</p>
+                        <p class="font-medium">{{$patient->insurance}}</p>
                     </div>
                     <div>
-                        <p class="text-gray-500 text-sm">Social Number</p>
-                        <p class="font-medium">123-45-6789</p>
+                        <p class="text-gray-500 text-sm">phone Number</p>
+                        <p class="font-medium">{{$patient->user->phone}}</p>
                     </div>
                     <div>
-                        <p class="text-gray-500 text-sm">Phone Number</p>
-                        <p class="font-medium">(555) 123-4567</p>
+                        <p class="text-gray-500 text-sm">Extra Phone Number</p>
+                        <p class="font-medium">{{$patient->extra_phone_number}}</p>
                     </div>
                     <div>
                         <p class="text-gray-500 text-sm">Gender</p>
-                        <p class="font-medium">Female</p>
+                        <p class="font-medium">{{$patient->user->gender}}</p>
                     </div>
                     <div>
                         <p class="text-gray-500 text-sm">Registered On</p>
-                        <p class="font-medium">Feb 10, 2020</p>
+                        {{ \Carbon\Carbon::parse($patient->registration_date)->format('M d, Y \a\t g:iA') }}
+                         <!-- 
+                        here we use back slash to ignore the word at letters and then g it's use for 12H format and i for minutes and A for day or night (am/pm)
+                         -->
                     </div>
                     <div>
-                        <p class="text-gray-500 text-sm">Patient Type</p>
-                        <p class="font-medium">Outpatient</p>
+                        <p class="text-gray-500 text-sm">CNSS</p>
+                        <p class="font-medium">{{$patient->CNSS}}</p>
                     </div>
                 </div>
             </div>
             
             <!-- Documents -->
-            <div class="bg-white rounded-lg shadow-sm p-4">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-semibold">Documents</h3>
-                    <button class="flex items-center space-x-1 text-blue-600 text-sm">
-                        <i class="fas fa-plus"></i>
-                        <span>Add files</span>
+            <!-- <div class="bg-white rounded-lg shadow-sm p-4">
+                -->
+                
+                <!-- Documents Section -->
+<div class="bg-white rounded-lg shadow-sm p-4">
+    <div class="flex justify-between items-center mb-4">
+        <h3 class="font-semibold">Documents</h3>
+        <button class="flex items-center space-x-1 text-blue-600 text-sm">
+            <i class="fas fa-plus"></i>
+            <span>Add files</span>
+        </button>
+    </div>
+
+    <div class="space-y-3">
+        @forelse ($patient->documents as $document)
+            <div class="flex justify-between items-center border-b pb-3">
+                <div class="flex items-center space-x-2">
+                    <i class="far fa-file-pdf text-gray-600"></i>
+                    <span>{{ $document->file_name }}</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <!-- Download Button -->
+                    <a href="{{ asset('storage/' . $document->file_path) }}" 
+                       class="text-gray-500" 
+                       download>
+                        <i class="fas fa-download"></i>
+                    </a>
+                    <!-- More Options -->
+                    <button class="text-gray-500">
+                        <i class="fas fa-ellipsis-v"></i>
                     </button>
                 </div>
-                
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <div class="flex items-center space-x-2">
-                            <i class="far fa-file-pdf text-gray-600"></i>
-                            <span>Blood Test Results.pdf</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <button class="text-gray-500">
-                                <i class="fas fa-download"></i>
-                            </button>
-                            <button class="text-gray-500">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <div class="flex items-center space-x-2">
-                            <i class="far fa-file-pdf text-gray-600"></i>
-                            <span>Prescription.pdf</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <button class="text-gray-500">
-                                <i class="fas fa-download"></i>
-                            </button>
-                            <button class="text-gray-500">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
+        @empty
+            <p class="text-gray-500 text-sm">No documents available.</p>
+        @endforelse
+    </div>
+</div>
+
+         
         </div>
         
         <!-- Medical Records -->
@@ -131,15 +135,15 @@
                     <div class="grid grid-cols-5 gap-4 flex-1">
                         <div>
                             <p class="text-gray-500 text-sm">Date</p>
-                            <p class="font-medium">Mar 01, 2023</p>
+                            <p class="font-medium">Mar 01, 2023 test</p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Symptoms</p>
-                            <p class="font-medium">Fatigue, Thirst</p>
+                            <p class="font-medium">Fatigue, Thirst test</p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Specialist</p>
-                            <p class="font-medium">Dr. John Smith</p>
+                            <p class="font-medium">Dr. John Smith test</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
@@ -167,26 +171,27 @@
             <div class="space-y-4">
                 <div class="flex items-start space-x-4 border-b pb-4">
                     <div class="flex flex-col items-center justify-center bg-indigo-100 rounded-lg px-2 py-3">
-                        <span class="text-indigo-800 font-semibold">15</span>
-                        <span class="text-xs text-indigo-600">Tue</span>
+                        <span class="text-indigo-800 font-semibold">15 test</span>
+                        <span class="text-xs text-indigo-600">Tue test</span>
                     </div>
                     
                     <div class="grid grid-cols-4 gap-4 flex-1">
                         <div>
                             <p class="text-gray-500 text-sm">Date</p>
-                            <p class="font-medium">Mar 15, 2023</p>
+                            <p class="font-medium">Mar 15, 2023 test</p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Symptoms</p>
-                            <p class="font-medium">Regular Checkup</p>
+                            <p class="font-medium">Regular Checkup test</p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Category</p>
-                            <p class="font-medium">Routine</p>
+                            <p class="font-medium">Routine test</p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Doctor</p>
-                            <p class="font-medium">Dr. Lisa White</p>
+                            <p class="font-medium">test</p>
+
                         </div>
                     </div>
                     
@@ -211,19 +216,47 @@
                     <div class="grid grid-cols-5 gap-4 flex-1">
                         <div>
                             <p class="text-gray-500 text-sm">Doctor</p>
-                            <p class="font-medium">Dr. Sarah Johnson</p>
+                            <p class="font-medium">
+                        @if($patient->doctor && $patient->doctor->user)
+                            Dr. {{$patient->doctor->user->first_name . ' ' . $patient->doctor->user->last_name}}
+                        @else
+                            <span class="text-red-500">Doctor not assigned</span>
+                        @endif
+                    </p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Specialty</p>
-                            <p class="font-medium">Cardiology</p>
+                            <p class="font-medium">
+                            @if($patient->doctor && $patient->doctor->specialist)
+                                {{$patient->doctor->specialist}}
+                            @else
+                                <span class="text-red-500">Specialist not assigned</span>
+                            @endif
+                        </p>
+
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Nurse</p>
-                            <p class="font-medium">Emily Smith</p>
+                            <p class="font-medium">
+                            @if($patient->nurse && $patient->nurse->user)
+                                {{$patient->nurse->user->first_name . ' ' . $patient->nurse->user->last_name}}
+                            @else
+                                <span class="text-red-500">Nurse not assigned</span>
+                            @endif
+                        </p>
+
+
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Contact</p>
-                            <p class="font-medium">(987) 654-3210</p>
+                            <p class="font-medium">
+                            @if($patient->nurse && $patient->nurse->user)
+                                {{$patient->nurse->user->phone}}
+                            @else
+                                <span class="text-red-500">available phone number</span>
+                            @endif
+                        </p>
+
                         </div>
                     </div>
                 </div>

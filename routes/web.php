@@ -121,7 +121,7 @@ Route::delete('doctor/{id}', [DoctorController::class, 'destroy'])->name('doctor
 Route::get('patients', [PatientController::class, 'index'])->name('patients-list');
 
 // Route::view('patients/show', 'admin.patients.show')->name('patient.show');
-Route::get('patient/show', [PatientController::class, 'show'])->name('patient.show');
+Route::get('patient/{id}/show', [PatientController::class, 'show'])->name('patient.show');
 
 Route::view('patients/edit', 'admin.patients.edit')->name('patient.edit');
 // Route::get('patient/{id}/edit', [PatientController::class, 'edit'])->name('patient.edit');
@@ -130,6 +130,7 @@ Route::post('create/patient', [PatientController::class, 'store'])->name('patien
 
 // Route::view('patients/create', 'admin.patients.create')->name('patient.create');
 Route::get('patients/create', [PatientController::class, 'create'])->name('patient.create');
+Route::delete('patients/{id}/delete', [PatientController::class, 'destroy'])->name('patient.delete');
     //stuffs
 // Route::view('staffs', 'admin.staffs.index')->name('stuffs');
 // Route::view('staff/create', 'admin.staffs.create')->name('stuff.create');
