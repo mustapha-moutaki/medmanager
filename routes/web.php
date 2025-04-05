@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\VitalController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\Auth\LoginController;
@@ -16,7 +19,6 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\PatientController;
 
 Route::get('/', function () {
     return view('home');
@@ -123,14 +125,24 @@ Route::get('patients', [PatientController::class, 'index'])->name('patients-list
 // Route::view('patients/show', 'admin.patients.show')->name('patient.show');
 Route::get('patient/{id}/show', [PatientController::class, 'show'])->name('patient.show');
 
-Route::view('patients/edit', 'admin.patients.edit')->name('patient.edit');
-// Route::get('patient/{id}/edit', [PatientController::class, 'edit'])->name('patient.edit');
+// Route::view('patients/edit', 'admin.patients.edit')->name('patient.edit');
+Route::get('patient/{id}/edit', [PatientController::class, 'edit'])->name('patient.edit');
+Route::delete('/documents/{id}', [DocumentController::class, 'destroy'])->name('documents.destroy');//is not working to the moment
+// Route::put('/patients/{patient}', [PatientController::class, 'update'])->name('patients.update');
+Route::put('/patients/{patient}', [PatientController::class, 'update'])->name('patients.update');
 
 Route::post('create/patient', [PatientController::class, 'store'])->name('patient.store');
 
 // Route::view('patients/create', 'admin.patients.create')->name('patient.create');
 Route::get('patients/create', [PatientController::class, 'create'])->name('patient.create');
 Route::delete('patients/{id}/delete', [PatientController::class, 'destroy'])->name('patient.delete');
+
+// Route::view('patient/vitals', 'admin.patients.patientVitals')->name('patient.vitals');
+
+// routes/web.php
+Route::get('/patients/{patient}/vitals', [VitalController::class, 'create'])->name('patient.vitals');
+Route::post('/patients/{patient}/vitals', [VitalController::class, 'store'])->name('patient.vitals.store');
+
     //stuffs
 // Route::view('staffs', 'admin.staffs.index')->name('stuffs');
 // Route::view('staff/create', 'admin.staffs.create')->name('stuff.create');

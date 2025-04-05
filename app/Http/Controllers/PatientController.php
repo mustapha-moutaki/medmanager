@@ -142,83 +142,126 @@ class PatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
-    {
-        $patient = Patient::with(['user', 'documents'])->findOrFail($id);
-        return view('admin.patients.edit', compact('patient'));
-    }
+        public function edit($id)
+        {
+            $doctors = Doctor::all();
+            $staff = Staff::where('role', 'Nurse')->with('user')->get();
+
+        
+            $patient = Patient::with(['user', 'documents'])->findOrFail($id);
+
+            return view('admin.patients.edit', compact('patient', 'doctors', 'staff'));
+        }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePatientRequest $request, $id)
-    {
-        // Find the patient by ID or fail if not found
-        $patient = Patient::findOrFail($id);
+    // public function update(UpdatePatientRequest $request, $id)
+    // {
+    //     // Find the patient by ID or fail if not found
+    //     $patient = Patient::findOrFail($id);
         
-        // Validate the incoming request data
+    //     // Validate the incoming request data
+    //     $validatedData = $request->validated();
+        
+    //     // Handle photo upload
+    //     if ($request->hasFile('photo')) {
+    //         // Delete the old photo if it exists
+    //         if ($patient->user->profile_photo) {
+    //             Storage::disk('public')->delete($patient->user->profile_photo);
+    //         }
+    //         // Store the new photo and update the validated data
+    //         $photoPath = $request->file('photo')->store('profile_photos', 'public');
+    //         $validatedData['profile_photo'] = $photoPath;
+    //     } else {
+    //         // Retain the existing photo if no new photo is uploaded
+    //         $validatedData['profile_photo'] = $patient->user->profile_photo;
+    //     }
+
+    //     // Update user profile details
+    //     $patient->user->update([
+    //         'first_name' => $validatedData['first_name'],
+    //         'last_name' => $validatedData['last_name'],
+    //         'birth_date' => $validatedData['birth_date'],
+    //         'age' => $validatedData['age'],
+    //         'gender' => $validatedData['gender'],
+    //         'address' => $validatedData['address'],
+    //         'phone' => $validatedData['phone'],
+    //         'email' => $validatedData['email'],
+    //         'bio' => $validatedData['bio'] ?? null,
+    //         'CIN' => $validatedData['CIN'],
+    //         'profile_photo' => $validatedData['profile_photo'] // Use the updated or existing photo path
+    //     ]);
+        
+    //     // Update patient profile details
+    //     $patient->update([
+    //         'marital_status' => $validatedData['marital_status'],
+    //         'CNSS' => $validatedData['CNSS'],
+    //         'insurance' => $validatedData['insurance'],
+    //         'patient_type' => $validatedData['patient_type'],
+    //         'extra_phone_number' => $validatedData['extra_phone_number']
+    //     ]);
+        
+    //     // Handle document uploads
+    //     if ($request->hasFile('documents')) {
+    //         foreach ($request->file('documents') as $file) {
+    //             // Store each document and create a Document record
+    //             $path = $file->store('patient_documents', 'public');
+    //             $document = new Document();
+    //             $document->user_id = $patient->user_id; // Associate document with the user
+    //             $document->patient_id = $patient->id;
+    //             $document->file_path = $path;
+    //             $document->file_name = $file->getClientOriginalName();
+    //             $document->file_type = $file->getClientOriginalExtension();
+    //             $document->file_size = $file->getSize();
+    //             $document->uploaded_by = auth()->id() ?? 1; // Default to 1 if not authenticated
+    //             $document->save();
+    //         }
+    //     }
+
+    //     // Redirect back to the patient's show page with a success message
+    //     return redirect()->route('admin.patients.show', $patient->id)
+    //         ->with('success', 'Patient profile updated successfully');
+    // }
+    public function update(UpdatePatientRequest $request, Patient $patient)
+    {
+
+        dd($request->all());
+        // Get the validated data
         $validatedData = $request->validated();
         
-        // Handle photo upload
-        if ($request->hasFile('photo')) {
-            // Delete the old photo if it exists
+        // Process profile photo if uploaded
+        if ($request->hasFile('profile_photo')) {
+            // Delete old photo if exists
             if ($patient->user->profile_photo) {
-                Storage::disk('public')->delete($patient->user->profile_photo);
+                Storage::delete($patient->user->profile_photo);
             }
-            // Store the new photo and update the validated data
-            $photoPath = $request->file('photo')->store('profile_photos', 'public');
-            $validatedData['profile_photo'] = $photoPath;
-        } else {
-            // Retain the existing photo if no new photo is uploaded
-            $validatedData['profile_photo'] = $patient->user->profile_photo;
+            
+            // Store new photo
+            $path = $request->file('profile_photo')->store('profile-photos', 'public');
+            $validatedData['profile_photo'] = $path;
         }
-
-        // Update user profile details
-        $patient->user->update([
-            'first_name' => $validatedData['first_name'],
-            'last_name' => $validatedData['last_name'],
-            'birth_date' => $validatedData['birth_date'],
-            'age' => $validatedData['age'],
-            'gender' => $validatedData['gender'],
-            'address' => $validatedData['address'],
-            'phone' => $validatedData['phone'],
-            'email' => $validatedData['email'],
-            'bio' => $validatedData['bio'] ?? null,
-            'CIN' => $validatedData['CIN'],
-            'profile_photo' => $validatedData['profile_photo'] // Use the updated or existing photo path
-        ]);
         
-        // Update patient profile details
-        $patient->update([
-            'marital_status' => $validatedData['marital_status'],
-            'CNSS' => $validatedData['CNSS'],
-            'insurance' => $validatedData['insurance'],
-            'patient_type' => $validatedData['patient_type'],
-            'extra_phone_number' => $validatedData['extra_phone_number']
-        ]);
+        // Split data for User and Patient models
+        $userData = array_intersect_key($validatedData, array_flip([
+            'first_name', 'last_name', 'birth_date', 'age', 'gender', 'CIN',
+            'bio', 'email', 'phone', 'address', 'profile_photo'
+        ]));
         
-        // Handle document uploads
-        if ($request->hasFile('documents')) {
-            foreach ($request->file('documents') as $file) {
-                // Store each document and create a Document record
-                $path = $file->store('patient_documents', 'public');
-                $document = new Document();
-                $document->user_id = $patient->user_id; // Associate document with the user
-                $document->patient_id = $patient->id;
-                $document->file_path = $path;
-                $document->file_name = $file->getClientOriginalName();
-                $document->file_type = $file->getClientOriginalExtension();
-                $document->file_size = $file->getSize();
-                $document->uploaded_by = auth()->id() ?? 1; // Default to 1 if not authenticated
-                $document->save();
-            }
-        }
-
-        // Redirect back to the patient's show page with a success message
-        return redirect()->route('admin.patients.show', $patient->id)
-            ->with('success', 'Patient profile updated successfully');
+        $patientData = array_intersect_key($validatedData, array_flip([
+            'marital_status', 'CNSS', 'patient_type', 'registration_date',
+            'insurance', 'doctor_id', 'nurse_id', 'extra_phone_number'
+        ]));
+        
+        // Update User record
+        $patient->user->update($userData);
+        
+        // Update Patient record
+        $patient->update($patientData);
+        
+        return redirect()->route('patients.show', $patient->id)
+            ->with('success', 'Patient information updated successfully');
     }
-
     /**
      * Remove the specified resource from storage.
      */

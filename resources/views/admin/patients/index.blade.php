@@ -60,7 +60,7 @@
                                 <a href="{{ route('patient.show' ,$patient->id)}}" class="text-blue-500 hover:text-blue-700">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="" class="text-green-500 hover:text-green-700">
+                                <a href="{{route('patient.edit', $patient->id)}}" class="text-green-500 hover:text-green-700">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="{{route('patient.delete', $patient->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this patient?');" class="inline">

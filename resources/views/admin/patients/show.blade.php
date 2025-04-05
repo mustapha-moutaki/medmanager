@@ -15,7 +15,7 @@
         <div class="flex space-x-4 mb-6">
             <div class="flex items-center space-x-3 bg-white rounded-lg p-4 shadow-sm flex-1">
                 <div class="rounded-full overflow-hidden w-12 h-12">
-                <img src="{{ $patient->user->profile_photo ? asset('storage/' . $patient->user->profile_photo) : 'https://randomuser.me/api/portraits/women/65.jpg' }}" alt="{{ $patient->user->first_name }}" class="w-full h-full object-cover">
+                <img src="{{ $patient->user->profile_photo ? asset('storage/' . $patient->user->profile_photo) : 'https://i.pinimg.com/736x/1d/ec/e2/1dece2c8357bdd7cee3b15036344faf5.jpg' }}" alt="{{ $patient->user->first_name }}" class="w-full h-full object-cover">
                  </div>
                 <div>
                     <h2 class="text-lg font-semibold">{{$patient->user->first_name . ' '. $patient->user->last_name}}</h2>
