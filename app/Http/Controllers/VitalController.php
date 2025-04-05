@@ -41,6 +41,7 @@ class VitalController extends Controller
      */
     public function show(Vital $vital)
     {
+
         return view('vitals.show', compact('vital'));
     }
 

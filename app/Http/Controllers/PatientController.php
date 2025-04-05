@@ -135,7 +135,7 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        $patient = Patient::where('id', $id)->with(['user', 'documents'])->firstOrFail();
+        $patient = Patient::where('id', $id)->with(['user', 'documents', 'vitals'])->firstOrFail();
         return view('admin.patients.show', compact('patient'));
     }
 

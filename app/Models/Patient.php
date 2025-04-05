@@ -65,4 +65,9 @@ public function nurse()
 {
     return $this->belongsTo(Staff::class, 'nurse_id');
 }
+
+public function vitals()
+{
+    return $this->hasMany(Vital::class);
+}
 }
