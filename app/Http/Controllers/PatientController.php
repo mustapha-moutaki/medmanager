@@ -9,6 +9,7 @@ use App\Models\Staff;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Document;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -142,16 +143,15 @@ class PatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-        public function edit($id)
-        {
-            $doctors = Doctor::all();
-            $staff = Staff::where('role', 'Nurse')->with('user')->get();
-
-        
-            $patient = Patient::with(['user', 'documents'])->findOrFail($id);
-
-            return view('admin.patients.edit', compact('patient', 'doctors', 'staff'));
-        }
+    public function edit($id)
+    {
+        $patient = Patient::with(['user', 'documents', 'appointments.doctor.user'])->findOrFail($id);
+        $doctors = Doctor::all();
+        $staff = Staff::where('role', 'Nurse')->with('user')->get();
+    
+        return view('admin.patients.edit', compact('patient', 'doctors', 'staff'));
+    }
+    
 
     /**
      * Update the specified resource in storage.

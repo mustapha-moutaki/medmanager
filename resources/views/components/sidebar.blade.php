@@ -45,8 +45,8 @@
                     Staff / Nurses
                 </a>
             </li>
-            <li class="sidebar-item {{ request()->routeIs('appointments-list') ? 'sidebar-active' : '' }}">
-                <a href="{{ route('appointments-list') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
+            <li class="sidebar-item {{ request()->routeIs('abusinessHour-list') ? 'sidebar-active' : '' }}">
+                <a href="{{ route('businessHour-list') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
                     <i class="fas fa-calendar-check mr-3 text-gray-500"></i>
                     Appointments
                 </a>

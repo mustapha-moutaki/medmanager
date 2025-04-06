@@ -288,72 +288,57 @@
 
         <!-- Appointments Section -->
         <div class="p-6 bg-orange-100 border-l-4 border-orange-500 mb-4 rounded-lg shadow">
-            <h3 class="text-xl font-semibold mb-4">
-                <i class="fas fa-calendar-alt mr-2 text-orange-600"></i>
-                Upcoming Appointments
-            </h3>
-            <div class="overflow-x-auto">
-                <table class="w-full bg-white border-collapse rounded-lg shadow">
-                    <thead>
-                        <tr class="bg-gray-50">
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Doctor</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-4 py-3 text-sm">Apr 10, 2025</td>
-                            <td class="px-4 py-3 text-sm">10:00 AM</td>
-                            <td class="px-4 py-3 text-sm">Check-up</td>
-                            <td class="px-4 py-3 text-sm">Dr. John Smith</td>
-                            <td class="px-4 py-3 text-sm">
-                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Confirmed</span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                <div class="flex space-x-2">
-                                    <button type="button" class="text-blue-600 hover:text-blue-800">Edit</button>
-                                    <button type="button" class="text-red-600 hover:text-red-800">Cancel</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-3 text-sm">Apr 15, 2025</td>
-                            <td class="px-4 py-3 text-sm">2:30 PM</td>
-                            <td class="px-4 py-3 text-sm">Follow-up</td>
-                            <td class="px-4 py-3 text-sm">Dr. Sarah Johnson</td>
-                            <td class="px-4 py-3 text-sm">
-                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Pending</span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                <div class="flex space-x-2">
-                                    <button type="button" class="text-blue-600 hover:text-blue-800">Edit</button>
-                                    <button type="button" class="text-red-600 hover:text-red-800">Cancel</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-3 text-sm">Apr 20, 2025</td>
-                            <td class="px-4 py-3 text-sm">1:00 PM</td>
-                            <td class="px-4 py-3 text-sm">Consultation</td>
-                            <td class="px-4 py-3 text-sm">Dr. Emily White</td>
-                            <td class="px-4 py-3 text-sm">
-                                <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Cancelled</span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                <div class="flex space-x-2">
-                                    <button type="button" class="text-blue-600 hover:text-blue-800">Edit</button>
-                                    <button type="button" class="text-red-600 hover:text-red-800">Cancel</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    <h3 class="text-xl font-semibold mb-4">
+        <i class="fas fa-calendar-alt mr-2 text-orange-600"></i>
+        Upcoming Appointments
+    </h3>
+
+    <!-- Add Appointment Button -->
+    <div class="mb-4">
+    <a href="{{ route('reserveappointment', ['id' => $patient->id]) }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-block">
+    Add Appointment
+</a>
+    </div>
+
+    <h2 class="text-lg font-bold mt-6 mb-2">Appointments</h2>
+
+<table class="w-full bg-white border-collapse rounded-lg shadow overflow-x-auto">
+    <thead>
+        <tr class="bg-gray-50">
+            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Time</th>
+            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">action</th>
+        </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+    @foreach($patient->appointments as $appointment)
+    <tr>
+        <td class="px-4 py-3 text-sm">{{ \Carbon\Carbon::parse($appointment->date)->format('M d, Y') }}</td>
+        <td class="px-4 py-3 text-sm">{{ \Carbon\Carbon::parse($appointment->time)->format('h:i A') }}</td>
+        <td class="px-4 py-3 text-sm">
+            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+                {{ ucfirst($appointment->status ?? 'pending') }}
+            </span>
+        </td>
+        <td class="px-4 py-3 text-sm">
+            <div class="flex space-x-2">
+            <form action="{{ route('reserve.cancel') }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" name="appointment_id" value="{{ $appointment->id }}">
+            <button type="submit" class="text-red-600 hover:text-red-800">Cancel</button>
+        </form>
             </div>
-        </div>
+        </td>
+    </tr>
+@endforeach
+
+    </tbody>
+</table>
+
+</div>
+
 
         <div class="flex space-x-4 mt-6">
             <button type="submit" form="patient-form" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200">

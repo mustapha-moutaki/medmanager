@@ -15,6 +15,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\BusinessHourController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -143,6 +145,10 @@ Route::delete('patients/{id}/delete', [PatientController::class, 'destroy'])->na
 Route::get('/patients/{patient}/vitals', [VitalController::class, 'create'])->name('patient.vitals');
 Route::post('/patients/{patient}/vitals', [VitalController::class, 'store'])->name('patient.vitals.store');
 
+
+
+
+
     //stuffs
 // Route::view('staffs', 'admin.staffs.index')->name('stuffs');
 // Route::view('staff/create', 'admin.staffs.create')->name('stuff.create');
@@ -161,13 +167,19 @@ Route::delete('staff/{id}', [StaffController::class, 'destroy'])->name('stuff.de
 Route::view('patients/billing', 'admin.billings.show')->name('patientbillingshow');
 
     //appointemtns
-Route::view('patients/appointments', 'admin.appointments.index')->name('appointments-list');
+// Route::view('patients/appointments', 'admin.appointments.index')->name('appointments-list');
+//appointments
+Route::get('appointments', [BusinessHourController::class, 'index'])->name('businessHour-list');
+Route::post('appointments', [BusinessHourController::class, 'update'])->name('businessHour.update');
 
-Route::view('patients/appointments/create', 'admin.appointments.create')->name('appointment.create');
 
-Route::view('patients/appointments/show', 'admin.appointments.show')->name('appointment.show');
+Route::get('/appointments/{id}', [AppointmentController::class, 'index'])->name('reserveappointment');
+Route::post('/appointments/reserve', [AppointmentController::class, 'reserve'])->name('reserve');
+Route::delete('/appointment/cancel',  [AppointmentController::class, 'destroy'])->name('reserve.cancel');
 
-Route::view('patients/appointments/edit', 'admin.appointments.edit')->name('appointment.edit');
+// Route::view('patients/appointments/create', 'admin.appointments.create')->name('appointment.create');
+// Route::view('patients/appointments/show', 'admin.appointments.show')->name('appointment.show');
+// Route::view('patients/appointments/edit', 'admin.appointments.edit')->name('appointment.edit');
 
     //recordes
 Route::view('patient-recordes-list', 'admin.patient-recordes.index')->name('recordes.index');

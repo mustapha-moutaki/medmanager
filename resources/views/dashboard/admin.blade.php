@@ -20,7 +20,7 @@
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <div class="text-3xl font-bold text-gray-800">150</div>
-                                        <div class="text-sm mt-1 text-gray-600">Total Patients</div>
+                                        <div class="text-sm mt-1 text-gray-600"></div>
                                     </div>
                                     <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
                                         <i class="fas fa-user-injured text-blue-500 text-xl"></i>
