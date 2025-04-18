@@ -182,7 +182,8 @@ Route::get('appointments', [BusinessHourController::class, 'index'])->name('busi
 Route::post('appointments', [BusinessHourController::class, 'update'])->name('businessHour.update');
 
 
-Route::get('/appointments/{id}', [AppointmentController::class, 'index'])->name('reserveappointment');
+// for patient to take his appoitment
+Route::get('appointments/{id}', [AppointmentController::class, 'index'])->name('reserveappointment');
 Route::post('/appointments/reserve', [AppointmentController::class, 'reserve'])->name('reserve');
 Route::delete('/appointment/cancel',  [AppointmentController::class, 'destroy'])->name('reserve.cancel');
 
