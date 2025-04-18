@@ -81,6 +81,7 @@ class AppointmentController extends Controller{
             return abort(403, 'Unauthorized access.');
         }
         
+        
         // Check if the patient exists
         if (!$patient) {
             return abort(404, 'Patient not found'); 
