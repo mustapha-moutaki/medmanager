@@ -12,7 +12,7 @@
             </div>
         </div>
         <!--admin sidebar --start--  -->
-        @if(auth()->user()->hasRole('admin'))
+        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('reception'))
         <!-- for the admin and reception -->
         <ul class="space-y-1">
 

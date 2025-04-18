@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
-
+use Illuminate\Support\Facades\Auth;
 class PatientController extends Controller
 {
     /**
@@ -27,6 +27,44 @@ class PatientController extends Controller
       
     //     return view('admin.patients.index', compact('patients'));
     // }
+
+
+    public function dashboard()
+    {
+
+        // dd(Auth::check());
+        
+        // Check if the user is authenticated
+        if (!Auth::check()) {
+            dd('no check');
+            return redirect('/home')->with('error', 'You must be logged in to access this page.');
+            
+        }
+    
+        $user = Auth::user(); // Get the authenticated user
+    
+        // Check if the user has the 'patient' role
+        if (!$user->hasRole('patient')) {
+            return redirect('/home')->with('error', 'You do not have permission to access this page.');
+            
+        }
+        
+        // Fetch the patient associated with the authenticated user
+        $patient = Patient::with(['user', 'documents', 'vitals', 'appointments'])->where('user_id', $user->id)->first();
+// dd($patient);
+    
+        // Check if patient exists
+        // if (!$patient) {
+        //     dd('heredirected because he is not patietnt that have documents ...');  
+        //     return redirect('/home')->with('error', 'Patient record not found.');
+            
+        // }
+    
+        return view('dashboard.patient', compact('patient'));
+    }
+    
+
+
 
     public function index(Request $request)
 {
@@ -92,7 +130,7 @@ class PatientController extends Controller
     }
     
         $user->save();
-    
+        // $user->assignRole('patient');
         // Create patient
         $patient = new Patient();
         $patient->user_id = $user->id;

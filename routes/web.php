@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\VitalController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialiteController;
@@ -54,11 +56,18 @@ Route::post('/logout', function () {
 // Route::view('/doctor/dashboard', 'dashboard.doctor')->name('doctor.dashboard');
 
 
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+// Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
 // Route::view('/admin/dashboard', 'dashboard.admin')->name('admin.dashboard');
 // Route::view('/patient/dashboard', 'dashboard.patient')->name('patient.dashboard');
 // Route::view('/doctor/dashboard', 'dashboard.doctor')->name('doctor.dashboard');
 
+// -----------------------------------------------------
+// Route::get('/monthly-patient-data', [ChartController::class, 'getMonthlyPatientRegistrations'])
+//     ->name('patient.monthly.data');
+
+Route::get('/patient-chart', [ChartController::class, 'index'])->name('patient.chart');
+// -----------------------------------
 
 
 Route::get('/redirect', function () {
@@ -70,7 +79,7 @@ Route::get('/home', function () {
         return redirect('/redirect'); // redirect based on the role
     }
     return redirect('/login'); // redirect to the login page if it's no logned
-});
+})->name('/home');
 
 
 
@@ -117,7 +126,7 @@ Route::view('create/doctor', 'admin.doctors.create')->name('create.doctor');//  
 Route::post('doctors', [DoctorController::class, 'store'])->name('doctor.store');
 Route::delete('doctor/{id}', [DoctorController::class, 'destroy'])->name('doctor.destroy');
 });
-
+// Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
 
     //manage patient
@@ -177,6 +186,7 @@ Route::get('/appointments/{id}', [AppointmentController::class, 'index'])->name(
 Route::post('/appointments/reserve', [AppointmentController::class, 'reserve'])->name('reserve');
 Route::delete('/appointment/cancel',  [AppointmentController::class, 'destroy'])->name('reserve.cancel');
 
+
 // Route::view('patients/appointments/create', 'admin.appointments.create')->name('appointment.create');
 // Route::view('patients/appointments/show', 'admin.appointments.show')->name('appointment.show');
 // Route::view('patients/appointments/edit', 'admin.appointments.edit')->name('appointment.edit');
@@ -189,14 +199,30 @@ Route::view('patient-recordes-list', 'admin.patient-recordes.index')->name('reco
 
 
 
+// Route::middleware([RoleMiddleware::class . ':admin'])->group(function () {
+//     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+// });
+// Route::middleware(['auth', 'role:admin'])->get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+// }); 
+// Route::middleware(['auth', 'role:admin,reception'])->get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+// In your routes file
+Route::get('/admin/dashboard', [AdminController::class, 'index'])
+    ->middleware(['auth', 'role:admin,reception'])
+    ->name('admin.dashboard');
+    
+    Route::middleware(['auth', 'role:patient'])->group(function () {
+        Route::get('/dashboard', [PatientController::class, 'dashboard'])->name('patient.dashboard');
+    });
+// Route::middleware(['auth', 'role:patient'])->group(function () {
+//     // Route::get('/patient', [UserController::class, 'index'])->name('patient.dashboard');
+//     Route::get('/dashboard', [PatientController::class, 'dashboard'])->name('patient.dashboard');
 
-Route::middleware([RoleMiddleware::class . ':admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-});
+// });
 
-Route::middleware([RoleMiddleware::class . ':patient'])->group(function () {
-    Route::get('/patient', [UserController::class, 'index'])->name('patient.dashboard');
-});
+
+// Route::middleware([RoleMiddleware::class . ':patient'])->group(function () {
+//     Route::get('/patient', [UserController::class, 'index'])->name('patient.dashboard');
+// });
 // Route::middleware([RoleMiddleware::class . ':User'])->group(function () {
 //     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 // });
