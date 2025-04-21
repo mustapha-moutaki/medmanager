@@ -33,13 +33,13 @@ class LoginController extends Controller
         $user = Auth::user();
 
       
-        if ($user->hasRole('admin') || $user->hasRole('reception')) {
-            // dd('he is an admin');
+        if ($user->hasRole('admin') || $user->hasRole('reception') || $user->hasRole('doctor')) {
+        
             return redirect()->route('admin.dashboard');
         } elseif ($user->hasRole('patient')) {
             // dd('he is a patient');
             return redirect()->route('patient.dashboard');
-        } else {
+        }else {
             dd('he is nothing');
             return redirect()->route('home');
         }

@@ -7,8 +7,8 @@
                 <div class="flex items-center justify-between mb-6">
                     <h1 class="text-2xl font-semibold text-gray-800">Dashboard Overview</h1>
                     <div class="text-sm text-gray-600">
-                        <i class="far fa-calendar-alt mr-1"></i> 
-                        <span id="currentDate">March 2, 2025</span>
+                        
+                        <!-- <span id="currentDate">March 2, 2025</span> -->
                     </div>
                 </div>
                 
@@ -51,7 +51,7 @@
                             <div class="stat-card bg-white p-4 border-l-4 border-purple-500">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <div class="text-3xl font-bold text-gray-800">$4,850</div>
+                                        <div class="text-3xl font-bold text-gray-800">$0,00</div>
                                         <div class="text-sm mt-1 text-gray-600">Revenue Today</div>
                                     </div>
                                     <div class="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center">
@@ -123,70 +123,47 @@
 
                         <!-- Chart Container -->
                         <div class="container">
-    <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">
-            {{ __('Monthly Patient Registrations') }}
-        </h2>
-        <div class="chart-container" style="height: 300px;">
-            <canvas id="patientsChart"></canvas>
-        </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+                                <h2 class="text-lg font-semibold text-gray-800 mb-4">
+                                    {{ __('Monthly Patient Registrations') }}
+                                </h2>
+                                <div style="width: 600px; height: 400px;">
+        <canvas id="patientsChart"></canvas>
     </div>
-</div>
-                   
-                        <!-- Doctors Section -->
-                        <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-lg font-semibold text-gray-800">Available Doctors Today</h2>
-                                <a href="#" class="text-sm text-primary hover:underline">View All</a>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <div class="profile-card bg-white shadow-sm overflow-hidden border border-gray-100">
-                                    <div class="h-24 bg-gradient-to-r from-blue-500 to-blue-700"></div>
-                                    <div class="flex justify-center -mt-8">
-                                        <img src="/api/placeholder/80/80" alt="Dr. Emma Thompson" class="h-16 w-16 rounded-full border-4 border-white object-cover">
-                                    </div>
-                                    <div class="text-center px-3 pb-4 pt-2">
-                                        <h3 class="text-gray-800 text-md font-semibold">Dr. Emma Thompson</h3>
-                                        <p class="mt-1 text-gray-600 text-sm">Cardiologist</p>
-                                        <div class="mt-2 flex justify-center space-x-2">
-                                            <button class="px-3 py-1 text-xs bg-primary text-white rounded-full">Schedule</button>
-                                            <button class="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full">Profile</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="profile-card bg-white shadow-sm overflow-hidden border border-gray-100">
-                                    <div class="h-24 bg-gradient-to-r from-green-500 to-green-700"></div>
-                                    <div class="flex justify-center -mt-8">
-                                        <img src="/api/placeholder/80/80" alt="Dr. Robert Chen" class="h-16 w-16 rounded-full border-4 border-white object-cover">
-                                    </div>
-                                    <div class="text-center px-3 pb-4 pt-2">
-                                        <h3 class="text-gray-800 text-md font-semibold">Dr. Robert Chen</h3>
-                                        <p class="mt-1 text-gray-600 text-sm">Neurologist</p>
-                                        <div class="mt-2 flex justify-center space-x-2">
-                                            <button class="px-3 py-1 text-xs bg-primary text-white rounded-full">Schedule</button>
-                                            <button class="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full">Profile</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="profile-card bg-white shadow-sm overflow-hidden border border-gray-100">
-                                    <div class="h-24 bg-gradient-to-r from-purple-500 to-purple-700"></div>
-                                    <div class="flex justify-center -mt-8">
-                                        <img src="/api/placeholder/80/80" alt="Dr. Sarah Johnson" class="h-16 w-16 rounded-full border-4 border-white object-cover">
-                                    </div>
-                                    <div class="text-center px-3 pb-4 pt-2">
-                                        <h3 class="text-gray-800 text-md font-semibold">Dr. Sarah Johnson</h3>
-                                        <p class="mt-1 text-gray-600 text-sm">Pediatrician</p>
-                                        <div class="mt-2 flex justify-center space-x-2">
-                                            <button class="px-3 py-1 text-xs bg-primary text-white rounded-full">Schedule</button>
-                                            <button class="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full">Profile</button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+@if(auth()->user()->hasRole('doctor')) 
+<div id='calendar'></div>
+@endif            
+                        <!-- Doctors Section -->
+                       <!-- Available Doctors Today Section -->
+<div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold text-gray-800">doctor</h2>
+        <a href="" class="text-sm text-primary hover:underline">best doctors</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @foreach($availableDoctors as $doctor)
+            <div class="profile-card bg-white shadow-sm overflow-hidden border border-gray-100">
+                <div class="h-24 bg-gradient-to-r from-blue-500 to-blue-700"></div>
+                <div class="flex justify-center -mt-8">
+                    <img src="{{ $doctor->user->profile_image ? $doctor->user->profile_image : 'https://i.pinimg.com/736x/a4/65/fa/a465facd516872128b2129177ca4c354.jpg' }}"  
+                         alt="Dr. {{ $doctor->user->first_name }}" 
+                         class="h-16 w-16 rounded-full border-4 border-white object-cover">
+                </div>
+                <div class="text-center px-3 pb-4 pt-2">
+                    <h3 class="text-gray-800 text-md font-semibold">Dr. {{ $doctor->user->last_name }}</h3>
+                    <p class="mt-1 text-gray-600 text-sm">{{ $doctor->specialty }}</p>
+                    <div class="mt-2 flex justify-center space-x-2">
+                        
                     </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+                    </div>
+
 
                     <!-- Calendar Section -->
                     <div>
@@ -196,12 +173,12 @@
                               
                             </div>
 
-                            <!-- Calendar Grid -->
+                            @if(!auth()->user()->hasRole('doctor')) 
       <!-- Calendar Section -->
 <div>
     <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
         <div class="flex items-center justify-between mb-4">
-            <h2 class="text-lg font-semibold text-gray-800">{{ \Carbon\Carbon::now()->format('F Y') }}</h2>
+            <h2 class="text-lg font-semibold text-gray-800"> <i class="far fa-calendar-alt mr-1"></i> {{ \Carbon\Carbon::now()->format('F Y') }}</h2>
             <div class="flex space-x-2">
                 <button class="p-1 rounded hover:bg-gray-100">
                     <!-- <i class="fas fa-chevron-left text-gray-600"></i> -->
@@ -275,7 +252,7 @@
         </div>
     </div>
 </div>
-
+@endif
                         <!-- Today's Appointments -->
                         <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
                             <div class="flex items-center justify-between mb-4">
@@ -327,6 +304,138 @@
                     </div>
                 </div>
             </div>
+
+
+           
+
+
+            <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+
+
+    
+  
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const months = ["Apr 2025"];
+            const counts = [8];
+
+            const ctx = document.getElementById('patientsChart').getContext('2d');
+            
+            // Create gradient for investment-style look
+            let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(25, 118, 210, 0.8)');
+            gradient.addColorStop(1, 'rgba(25, 118, 210, 0.2)');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'New Patients',
+                        data: counts,
+                        backgroundColor: gradient,
+                        borderColor: 'rgba(13, 71, 161, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        barThickness: 60
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                color: '#2c3e50'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Monthly Patient Registrations',
+                            font: {
+                                family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                                size: 20,
+                                weight: 'bold'
+                            },
+                            color: '#2c3e50',
+                            padding: {
+                                top: 10,
+                                bottom: 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(25, 118, 210, 0.9)',
+                            titleFont: {
+                                family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                                size: 14
+                            },
+                            bodyFont: {
+                                family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                                size: 14
+                            },
+                            displayColors: false,
+                            padding: 12,
+                            cornerRadius: 4
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(200, 200, 200, 0.3)',
+                                borderDash: [5, 5]
+                            },
+                            title: {
+                                display: true,
+                                text: 'Number of Patients',
+                                font: {
+                                    family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                color: '#2c3e50'
+                            },
+                            ticks: {
+                                stepSize: 1,
+                                font: {
+                                    family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                                },
+                                color: '#2c3e50'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                                    size: 12
+                                },
+                                color: '#2c3e50'
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        });
+    </script>
+
+
+
         </main>
         @endsection
         @section('scripts')

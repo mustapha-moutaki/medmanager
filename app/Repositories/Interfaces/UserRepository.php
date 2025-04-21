@@ -11,5 +11,6 @@ interface UserRepository
     public function countStaff(); 
     public function countAppointments();
     public function gender();
+    public function getDoctorAppointments();
     
 }

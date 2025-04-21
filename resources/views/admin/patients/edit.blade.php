@@ -294,11 +294,13 @@
     </h3>
 
     <!-- Add Appointment Button -->
+    @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('reception'))
     <div class="mb-4">
     <a href="{{ route('reserveappointment', ['id' => $patient->id]) }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-block">
     Add Appointment
 </a>
     </div>
+@endif
 
     <h2 class="text-lg font-bold mt-6 mb-2">Appointments</h2>
 

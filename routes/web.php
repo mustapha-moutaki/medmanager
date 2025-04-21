@@ -208,12 +208,14 @@ Route::view('patient-recordes-list', 'admin.patient-recordes.index')->name('reco
 // Route::middleware(['auth', 'role:admin,reception'])->get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 // In your routes file
 Route::get('/admin/dashboard', [AdminController::class, 'index'])
-    ->middleware(['auth', 'role:admin,reception'])
+    ->middleware(['auth', 'role:admin,reception,doctor'])
     ->name('admin.dashboard');
     
     Route::middleware(['auth', 'role:patient'])->group(function () {
         Route::get('/dashboard', [PatientController::class, 'dashboard'])->name('patient.dashboard');
     });
+
+  
 // Route::middleware(['auth', 'role:patient'])->group(function () {
 //     // Route::get('/patient', [UserController::class, 'index'])->name('patient.dashboard');
 //     Route::get('/dashboard', [PatientController::class, 'dashboard'])->name('patient.dashboard');

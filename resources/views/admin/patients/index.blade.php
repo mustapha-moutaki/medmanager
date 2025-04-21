@@ -5,10 +5,12 @@
     <div class="mb-4 flex space-x-4 justify-between items-center">
         <h2 class="text-xl font-bold text-gray-800">Patients List</h2>
         <div class="flex items-center space-x-4">
+        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('reception'))
             <a href="{{ route('patient.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow flex items-center transition duration-300">
                 <i class="fas fa-user-plus mr-2"></i>
                 Add New Patient
             </a>
+    @endif
                 <form id="filterForm" class="flex items-center space-x-2">
                 <input type="text" id="searchInput" placeholder="Search by name" class="border border-gray-300 rounded-md p-1 text-sm" />
                     <select id="genderFilter" name="gender" class="border border-gray-300 rounded-md p-1 text-sm">

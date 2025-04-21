@@ -3,10 +3,11 @@ namespace App\Repositories;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Staff;
 use App\Models\Doctor;
+use App\Models\Patient; 
 use App\Models\Appointment;
-use App\Models\Patient; // نموذج المرضى
-use App\Models\Staff; // نموذج الموظفين
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\Interfaces\UserRepository;
 
 class EloquentUserRepository implements UserRepository
@@ -36,10 +37,40 @@ class EloquentUserRepository implements UserRepository
         return Staff::count(); 
     }
 
+
+
+
     public function countAppointments()
     {
         return Appointment::whereDate('date', Carbon::today())->count();
     }
+
+    function getDoctorAppointments()
+{
+    // Get the logged-in doctor
+    $doctor = Auth::user();
+
+    // Fetch all patients for the logged-in doctor
+    $patients = Patient::where('user_id', $doctor->id)->get();
+
+    // Fetch all appointments for the doctor's patients
+    $appointments = Appointment::whereIn('patient_id', $patients->pluck('id'))->get();
+
+    // Get the current date
+    $currentDate = now();
+
+    // Format appointments for FullCalendar
+    return $appointments->map(function ($appointment) use ($currentDate) {
+        $isPast = $appointment->date < $currentDate;
+
+        return [
+            'title' => 'Appointment with ' . $appointment->patient->name,
+            'start' => $appointment->date, // Format: Y-m-d H:i:s
+            'end' => $appointment->end_time, // Include end time if needed
+            'className' => $isPast ? 'past-appointment' : 'future-appointment' // Add class based on date
+        ];
+    });
+}
 
     public function gender()
     {

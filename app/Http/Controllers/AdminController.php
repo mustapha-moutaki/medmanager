@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon; 
+use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Appointment; 
 use Illuminate\Support\Facades\DB;
@@ -19,13 +20,14 @@ class AdminController extends Controller
 
     public function index()
     {
-        if (Auth::check() && Auth::user()->hasRole(['admin']) || Auth::user()->hasRole(['reception'])) {
+        if (Auth::check() && Auth::user()->hasRole(['admin']) || Auth::user()->hasRole(['reception']) || Auth::user()->hasRole(['doctor'])) {
+            $availableDoctors = Doctor::with('user')->get()->take(3);
             $doctorsCount = $this->userRepository->countDoctors();
             $patientsCount = $this->userRepository->countPatients();
             $staffCount = $this->userRepository->countStaff();
             $appointmentsCount = $this->userRepository->countAppointments();
             $genderStats = $this->userRepository->gender(); 
-
+            $getDoctorAppointments = $this->userRepository->getDoctorAppointments();
             // Fetch today's appointments
             $currentDate = Carbon::now()->format('Y-m-d');
             $appointments = Appointment::whereDate('date', $currentDate)
@@ -62,7 +64,9 @@ class AdminController extends Controller
                     'doctorsCount' => $doctorsCount,
                     'patientsCount' => $patientsCount,
                     'staffCount' => $staffCount,
+                    'getDoctorAppointments'=>$getDoctorAppointments,//new
                     'appointmentsCount' => $appointmentsCount,
+                    'availableDoctors'=>$availableDoctors,
                     'genderStats' => $genderStats,
                     'appointments' => $appointments,
                     'chartMonths' => json_encode($months),
