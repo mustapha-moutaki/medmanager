@@ -48,7 +48,7 @@
     }
 </style>
 
-<!-- Patient Info Form -->
+
 <h2>Patient Information</h2>
 <div class="form-row">
     <input type="text" id="formPatientName" placeholder="Patient Name">
