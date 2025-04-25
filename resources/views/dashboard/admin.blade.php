@@ -283,7 +283,7 @@
             @endif
                             </div>
                         </div>
-                        
+                        @if(!auth()->user()->hasRole('doctor')) 
                        <!-- Quick Actions -->
                        <div class="bg-white p-4 rounded-lg shadow-sm">
                         <h2 class="text-lg font-semibold text-gray-800 mb-3">Quick Actions</h2>
@@ -305,7 +305,7 @@
                 </div>
             </div>
 
-
+@endif
            
 
 

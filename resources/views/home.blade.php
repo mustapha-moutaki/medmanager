@@ -96,13 +96,13 @@
         <a href="{{ route('login') }}">
           <button class="hidden md:flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors transform hover:scale-105 duration-200">
             <i class="fa-solid fa-right-to-bracket"></i>
-            Patient Portal
+            Login
           </button>
         </a>
         <a href="{{ route('register.create') }}">
           <button class="hidden md:flex items-center gap-2 border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50 transition-colors bg-white transform hover:scale-105 duration-200">
             <i class="fa-solid fa-user-plus"></i>
-            New Patient
+            Register
           </button>
         </a>
         <a href="{{ route('login') }}">

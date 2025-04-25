@@ -25,7 +25,8 @@
                     Dashboard
                 </a>
             </li>
-           
+            @endif
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('reception'))
             <li class="sidebar-item {{ request()->routeIs('doctors') ? 'sidebar-active' : '' }}">
                 <a href="{{ route('doctors') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
                     <i class="fas fa-user-md mr-3 text-gray-500"></i>
