@@ -56,4 +56,7 @@ protected $fillable = [
         return $this->patients()->count();
     }
 
+
+  
+
 }

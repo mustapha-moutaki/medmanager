@@ -132,9 +132,7 @@
     </div>
                             </div>
                         </div>
-@if(auth()->user()->hasRole('doctor')) 
-<div id='calendar'></div>
-@endif            
+         
                         <!-- Doctors Section -->
                        <!-- Available Doctors Today Section -->
 <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
@@ -169,9 +167,14 @@
                     <div>
                         <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
                             <div class="flex items-center justify-between mb-4">
-                               
-                              
                             </div>
+
+
+@if(auth()->user()->hasRole('doctor')) 
+<div id='calendar'></div>
+@endif   
+
+
 
                             @if(!auth()->user()->hasRole('doctor')) 
       <!-- Calendar Section -->
@@ -309,14 +312,20 @@
            
 
 
-            <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+<!-- FullCalendar 3.x -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale-all.min.js"></script>
+
+<!-- Optional: SweetAlert2 for better looking popups -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-    
+
   
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const months = ["Apr 2025"];
@@ -500,5 +509,9 @@
                 }
             });
         });
+
+        
     </script>
+
+    
 @endsection

@@ -18,7 +18,7 @@ class Appointment extends Model
         'time' =>'datetime'
     ];
     protected $guarded = [];
-
+ 
 
     public function doctor()
 {

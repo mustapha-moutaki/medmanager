@@ -70,4 +70,6 @@ public function vitals()
 {
     return $this->hasMany(Vital::class);
 }
+
+
 }
