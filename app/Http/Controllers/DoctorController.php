@@ -188,7 +188,6 @@ public function store(StoreDoctorRequest $request){
         $doctor->update([
             'specialist' => $validatedData['specialist'],
             'yearsOfExperience' => $validatedData['years_of_experience'],
-            'patients_treated' => $validatedData['patients_treated'],
             'certificate' => $validatedData['certificates'] ?? null,
             'emergency_contact_phone' => $validatedData['emergency_contact_phone']
         ]);

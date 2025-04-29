@@ -8,9 +8,15 @@
         </div>
 
         <div class="p-6 text-center">
-            <img src="{{ $doctor->photo ?? '/images/doctor1.jpg' }}" 
-                 alt="{{ $doctor->full_name }}" 
-                 class="w-32 h-32 rounded-full mx-auto object-cover border-2 border-blue-500 mb-4">
+        @if($doctor->user->gender == 'male')
+    <img src="{{ $doctor->user->profile_photo ? asset('storage/' . $doctor->user->profile_photo) : 'https://i.pinimg.com/736x/a4/65/fa/a465facd516872128b2129177ca4c354.jpg' }}" 
+         alt="Dr. {{ $doctor->user->first_name }} {{ $doctor->user->last_name }}" 
+         class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500">
+@else
+    <img src="{{ $doctor->user->profile_photo ? asset('storage/' . $doctor->user->profile_photo) : 'https://i.pinimg.com/736x/41/bd/fc/41bdfcf77b854da843f843ccf594b3cf.jpg' }}" 
+         alt="Dr. {{ $doctor->user->first_name }} {{ $doctor->user->last_name }}" 
+         class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500">
+@endif
             <h3 class="text-lg font-semibold text-gray-800">{{ $doctor->user->first_name }}</h3>
         </div>
 
@@ -124,12 +130,7 @@
                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" 
                                    value="{{ old('years_of_experience', $doctor->yearsOfExperience) }}" required>
                         </div>
-                        <div class="bg-blue-50 p-4 rounded-lg">
-                            <label class="text-xs text-gray-500" for="patients_treated">Patients Treated</label>
-                            <input type="number" id="patients_treated" name="patients_treated" 
-                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" 
-                                   value="{{ old('patients_treated', $doctor->patients_treated) }}">
-                        </div>
+                       
                         <div class="bg-blue-50 p-4 rounded-lg">
                             <label class="text-xs text-gray-500" for="certificates">Certificates</label>
                             <input type="text" id="certificates" name="certificates" 

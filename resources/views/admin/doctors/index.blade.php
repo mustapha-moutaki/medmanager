@@ -40,11 +40,11 @@
             <div class="p-4 text-center">
                 <div class="mb-3">
                 @if($doctor->user->gender == 'male')
-    <img src="{{ $doctor->user->profile_image ? $doctor->user->profile_image : 'https://i.pinimg.com/736x/a4/65/fa/a465facd516872128b2129177ca4c354.jpg' }}" 
+    <img src="{{ $doctor->user->profile_photo ? asset('storage/' . $doctor->user->profile_photo) : 'https://i.pinimg.com/736x/a4/65/fa/a465facd516872128b2129177ca4c354.jpg' }}" 
          alt="Dr. {{ $doctor->user->first_name }} {{ $doctor->user->last_name }}" 
          class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500">
 @else
-    <img src="{{ $doctor->user->profile_image ? $doctor->user->profile_image : 'https://i.pinimg.com/736x/41/bd/fc/41bdfcf77b854da843f843ccf594b3cf.jpg' }}" 
+    <img src="{{ $doctor->user->profile_photo ? asset('storage/' . $doctor->user->profile_photo) : 'https://i.pinimg.com/736x/41/bd/fc/41bdfcf77b854da843f843ccf594b3cf.jpg' }}" 
          alt="Dr. {{ $doctor->user->first_name }} {{ $doctor->user->last_name }}" 
          class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-blue-500">
 @endif
@@ -73,7 +73,7 @@
                     
                     <div class="bg-blue-50 p-2 rounded-lg">
                         <h4 class="text-xs text-gray-500">Patients</h4>
-                        <p class="text-sm font-bold text-blue-800">5,420+</p>
+                        <p class="text-sm font-bold text-blue-800">{{ $doctor->patientCount }}</p>
                     </div>
                 </div>
                 
