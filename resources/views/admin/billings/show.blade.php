@@ -2,10 +2,6 @@
 
 @section('content')
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
     h1, h2 {
         text-align: center;
     }

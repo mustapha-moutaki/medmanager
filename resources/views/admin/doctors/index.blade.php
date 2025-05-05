@@ -2,6 +2,14 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
+    <!-- Add Doctor Button -->
+    <div class="mb-6 flex justify-end">
+        <a href="{{route('create.doctor')}}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow flex items-center transition duration-300">
+            <i class="fas fa-user-plus mr-2"></i>
+            Add New Doctor
+        </a>
+    </div>
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- Doctor Card 1 -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
@@ -35,10 +43,10 @@
                 </div>
                 
                 <div class="mt-3 flex justify-center space-x-3">
-                    <a href="#" class="text-blue-500 hover:text-blue-700">
+                    <a href="{{route('doctor.show')}}" class="text-blue-500 hover:text-blue-700">
                         <i class="fas fa-eye text-lg"></i>
                     </a>
-                    <a href="#" class="text-green-500 hover:text-green-700">
+                    <a href="{{route('doctor.edit')}}" class="text-green-500 hover:text-green-700">
                         <i class="fas fa-edit text-lg"></i>
                     </a>
                     <a href="#" class="text-red-500 hover:text-red-700">
@@ -139,4 +147,5 @@
         </div>
     </div>
 </div>
+
 @endsection

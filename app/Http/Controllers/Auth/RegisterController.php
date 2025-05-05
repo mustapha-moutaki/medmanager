@@ -1,11 +1,12 @@
 <?php
-namespace App\Http\Controllers;
-
-use App\Http\Requests\RegisterRequest;
+namespace App\Http\Controllers\Auth;
+use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterRequest;
 
 class RegisterController extends Controller
 {
@@ -30,7 +31,7 @@ class RegisterController extends Controller
         'password' => 'required|string|min:8',
     ]);
 
-    User::create([
+    $user = User::create([
         'first_name' => $request->first_name,
         'last_name' => $request->last_name,
         'email' => $request->email,
@@ -42,6 +43,12 @@ class RegisterController extends Controller
         'password' => bcrypt($request->password),
     ]);
 
+
+//this code for assign patient role for users by default
+    $patientRole = Role::where('name', 'patient')->first();  
+    if ($patientRole) {
+        $user->roles()->attach($patientRole->id); 
+    }
     return redirect()->route('login')->with('success', 'Account created successfully!');
 }
 
