@@ -18,6 +18,7 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
+        // dd($request);
     // dd($credentials); // Check the credentials
 
     
@@ -28,7 +29,20 @@ class LoginController extends Controller
     // Attempt to log the user in
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         // Authentication successful
-        return redirect()->intended(route('admin.dashboard'));
+        // return redirect()->intended(route('admin.dashboard'));
+        $user = Auth::user();
+
+      
+        if ($user->hasRole('admin') || $user->hasRole('reception') || $user->hasRole('doctor')) {
+        
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->hasRole('patient')) {
+            // dd('he is a patient');
+            return redirect()->route('patient.dashboard');
+        }else {
+            dd('he is nothing');
+            return redirect()->route('home');
+        }
     } else {
         // Authentication failed
         return back()->with('error', 'Invalid email or password')->withInput();

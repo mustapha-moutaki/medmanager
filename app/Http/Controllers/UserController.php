@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Interfaces\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Repositories\Interfaces\UserRepository;
 
 class UserController extends Controller
 {
@@ -18,6 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userRepository->all();
+        
         return view('dashboard.patient', compact('users'));
     }
 

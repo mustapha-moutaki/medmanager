@@ -5,16 +5,18 @@
                 <i class="fas fa-user-md text-white text-sm"></i>
             </div>
             <div>
-                <div class="text-sm font-medium text-gray-700">Dr. Smith</div>
+            <div class="text-sm font-medium text-gray-700">
+            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+        </div>
                 <div class="text-xs text-gray-500">Medical Director</div>
             </div>
         </div>
         <!--admin sidebar --start--  -->
-        @if(auth()->user()->hasRole('admin'))
+      
         <!-- for the admin and reception -->
         <ul class="space-y-1">
 
-            
+              @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('reception'))
 
             <!-- routeIs :comparing between the routes in url and the section route if they are match giving a class attribute  -->
             <li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'sidebar-active' : '' }}">
@@ -23,7 +25,8 @@
                     Dashboard
                 </a>
             </li>
-           
+            @endif
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('reception'))
             <li class="sidebar-item {{ request()->routeIs('doctors') ? 'sidebar-active' : '' }}">
                 <a href="{{ route('doctors') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
                     <i class="fas fa-user-md mr-3 text-gray-500"></i>
@@ -31,20 +34,24 @@
                 </a>
               
             </li>
+          @endif
+            @if(auth()->user()->hasRole('doctor') || auth()->user()->hasRole('admin') || auth()->user()->hasRole('reception'))
             <li class="sidebar-item {{ request()->routeIs('patients-list') ? 'sidebar-active' : '' }}">
                 <a href="{{ route('patients-list') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
                     <i class="fas fa-procedures mr-3 text-gray-500"></i>
                     Patients
                 </a>
             </li>
+            @endif
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('reception'))
             <li class="sidebar-item {{ request()->routeIs('stuffs') ? 'sidebar-active' : '' }}">
                 <a href="{{ route('stuffs') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
                     <i class="fas fa-user-nurse mr-3 text-gray-500"></i>
                     Staff / Nurses
                 </a>
             </li>
-            <li class="sidebar-item {{ request()->routeIs('appointments-list') ? 'sidebar-active' : '' }}">
-                <a href="{{ route('appointments-list') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
+            <li class="sidebar-item {{ request()->routeIs('abusinessHour-list') ? 'sidebar-active' : '' }}">
+                <a href="{{ route('businessHour-list') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
                     <i class="fas fa-calendar-check mr-3 text-gray-500"></i>
                     Appointments
                 </a>
@@ -61,24 +68,29 @@
                     Prescriptions
                 </a>
             </li>
+            @if(!auth()->user()->hasRole('admin') || auth()->user()->hasRole('doctor'))
             <li class="sidebar-item {{ request()->routeIs('patientbillingshow') ? 'sidebar-active' : '' }}">
                 <a href="{{ route('patientbillingshow') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
                     <i class="fas fa-money-bill-wave mr-3 text-gray-500"></i>
                     Billing
                 </a>
             </li>
+            @endif
+            @if(auth()->user()->hasRole('admin'))
             <li class="sidebar-item {{ request()->routeIs('settings') ? 'sidebar-active' : '' }}">
                 <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
                     <i class="fas fa-cog mr-3 text-gray-500"></i>
                     Settings
                 </a>
             </li>
+            @endif
+            @endif
         </ul>
-        @endif
+    
         <!-- admin dashboard end -->
 
         <!-- end doctor and reception dashboard -->
-        @if(auth()->user()->hasRole('doctor'))
+        <!-- @if(auth()->user()->hasRole('doctor'))
         <ul class="space-y-1">
             <li class="sidebar-item {{ request()->routeIs('patient.dashboard') ? 'sidebar-active' : '' }}">
                 <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 font-medium">
@@ -129,7 +141,7 @@
                 </a>
             </li>
         </ul>
-        @endif
+        @endif -->
         <!-- end patient dashboard -->
     </div>
 </aside>

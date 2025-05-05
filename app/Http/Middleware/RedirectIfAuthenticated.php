@@ -27,7 +27,7 @@ class RedirectIfAuthenticated
         $dashboardRoutes = [
             'Admin'     => '/admin/dashboard',
             'Patient'   => '/patient/dashboard',
-            'Reception' => '/doctor/dashboard',
+            'Reception' => '/admin/dashboard',
         ];
 
         //valid the role and redirceting 

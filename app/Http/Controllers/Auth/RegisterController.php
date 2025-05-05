@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
-
+use App\Models\Patient;
 class RegisterController extends Controller
 {
     // Show the registration form
@@ -49,6 +49,19 @@ class RegisterController extends Controller
     if ($patientRole) {
         $user->roles()->attach($patientRole->id); 
     }
+
+
+   // Create a patient record
+$patient = new \App\Models\Patient();
+$patient->user_id = $user->id;
+$patient->registration_date = now();
+
+$patient->marital_status = 'single';
+
+$patient->patient_type = 'emergency'; 
+$patient->save();
+
+
     return redirect()->route('login')->with('success', 'Account created successfully!');
 }
 

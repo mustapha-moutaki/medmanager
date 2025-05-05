@@ -5,5 +5,12 @@ interface UserRepository
 {
     public function all();
     public function find($id);
-    // You can add more methods as needed (create, update, delete, etc.)
+
+    public function countDoctors();
+    public function countPatients();
+    public function countStaff(); 
+    public function countAppointments();
+    public function gender();
+    public function getDoctorAppointments();
+    
 }
