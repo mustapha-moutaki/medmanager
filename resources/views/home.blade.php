@@ -376,13 +376,13 @@
         <!-- Doctor 1 -->
         <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition-shadow slide-in transform hover:scale-105 duration-300">
           <div class="relative">
-            <img src="/api/placeholder/300/300" alt="Dr. Michael Johnson" class="w-full h-64 object-cover"/>
+            <img src="https://i.pinimg.com/736x/c6/70/82/c670828f731193917318871aa2e0ce04.jpg" alt="Dr. Michael Johnson" class="w-full h-64 object-cover"/>
             <div class="absolute top-4 right-4 bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
               Chief of Cardiology
             </div>
           </div>
           <div class="p-6">
-            <h3 class="font-bold text-xl mb-1">Dr. Michael Johnson</h3>
+            <h3 class="font-bold text-xl mb-1">Dr. mohammed Johnson</h3>
             <p class="text-gray-600 text-sm mb-4">Cardiology Specialist</p>
             <p class="text-gray-700 text-sm mb-4">Over 15 years of experience in treating complex cardiac conditions using minimally invasive techniques.</p>
             <div class="flex justify-between items-center">
@@ -398,13 +398,13 @@
         <!-- Doctor 2 -->
         <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition-shadow slide-in transform hover:scale-105 duration-300" style="transition-delay: 200ms">
           <div class="relative">
-            <img src="/api/placeholder/300/300" alt="Dr. Sarah Evans" class="w-full h-64 object-cover"/>
+            <img src="https://i.pinimg.com/736x/3f/98/9d/3f989de9065b7a42f3d3faaf7d4b99d9.jpg" alt="Dr. Sarah Evans" class="w-full h-64 object-cover"/>
             <div class="absolute top-4 right-4 bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
               Head of Obstetrics
             </div>
           </div>
           <div class="p-6">
-            <h3 class="font-bold text-xl mb-1">Dr. Sarah Evans</h3>
+            <h3 class="font-bold text-xl mb-1">Dr. said Evans</h3>
             <p class="text-gray-600 text-sm mb-4">OB/GYN Specialist</p>
             <p class="text-gray-700 text-sm mb-4">Passionate about women's health with expertise in high-risk pregnancies and minimally invasive gynecological procedures.</p>
             <div class="flex justify-between items-center">
@@ -420,13 +420,13 @@
         <!-- Doctor 3 -->
         <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition-shadow slide-in transform hover:scale-105 duration-300" style="transition-delay: 400ms">
           <div class="relative">
-            <img src="/api/placeholder/300/300" alt="Dr. Robert Chen" class="w-full h-64 object-cover"/>
+            <img src="https://i.pinimg.com/736x/29/99/30/299930e002ed6fe389f58e80af63c403.jpg" alt="Dr. Robert Chen" class="w-full h-64 object-cover"/>
             <div class="absolute top-4 right-4 bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
               Neurologist
             </div>
           </div>
           <div class="p-6">
-            <h3 class="font-bold text-xl mb-1">Dr. Robert Chen</h3>
+            <h3 class="font-bold text-xl mb-1">Dr. karim Chen</h3>
             <p class="text-gray-600 text-sm mb-4">Neurology Specialist</p>
             <p class="text-gray-700 text-sm mb-4">Specialized in treating complex neurological disorders with advanced diagnostic techniques and personalized treatment plans.</p>
             <div class="flex justify-between items-center">
@@ -442,13 +442,13 @@
         <!-- Doctor 4 -->
         <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition-shadow slide-in transform hover:scale-105 duration-300" style="transition-delay: 600ms">
           <div class="relative">
-            <img src="/api/placeholder/300/300" alt="Dr. Lisa Williams" class="w-full h-64 object-cover"/>
+            <img src="https://i.pinimg.com/736x/6e/9d/f2/6e9df2f3c04e28142ac302426ac5749f.jpg" alt="Dr. Lisa Williams" class="w-full h-64 object-cover"/>
             <div class="absolute top-4 right-4 bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
               Pediatrician
             </div>
           </div>
           <div class="p-6">
-            <h3 class="font-bold text-xl mb-1">Dr. Lisa Williams</h3>
+            <h3 class="font-bold text-xl mb-1">Dr. Ahmed </h3>
             <p class="text-gray-600 text-sm mb-4">Pediatrics Specialist</p>
             <p class="text-gray-700 text-sm mb-4">Devoted to children's health and development with a focus on preventive care and childhood chronic conditions management.</p>
             <div class="flex justify-between items-center">
@@ -543,7 +543,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
         <!-- Contact Form -->
         <div class="slide-in">
-          <form class="space-y-6">
+          <!-- <form class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
@@ -563,7 +563,7 @@
               <textarea id="message" rows="5" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="How can we help you?"></textarea>
             </div>
             <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded font-medium hover:bg-blue-700 transform hover:scale-105 duration-200 w-full">Send Message</button>
-          </form>
+          </form> -->
         </div>
         
         <!-- Location & Info -->

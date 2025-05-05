@@ -193,7 +193,7 @@
         </div>
 
         <!-- Medical Records Section -->
-        <div class="p-6 bg-yellow-100 border-l-4 border-yellow-500 mb-4 rounded-lg shadow">
+        <!-- <div class="p-6 bg-yellow-100 border-l-4 border-yellow-500 mb-4 rounded-lg shadow">
             <h3 class="text-xl font-semibold mb-4">
                 <i class="fas fa-file-medical mr-2 text-yellow-600"></i>
                 Medical Records
@@ -249,7 +249,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
 
         <!-- Documents Section -->
         <div class="p-6 bg-purple-100 border-l-4 border-purple-500 mb-4 rounded-lg shadow">
