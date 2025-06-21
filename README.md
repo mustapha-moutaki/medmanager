@@ -12,6 +12,8 @@ A full-featured Laravel-based Hospital Management System designed to streamline 
 - View statistics and activity logs
 - Control access roles and permissions
 
+- ![Image](https://github.com/user-attachments/assets/345791fa-5bfd-4a63-a072-395073db9d4c)
+
 ### 👨‍⚕️ Doctors
 - View and manage assigned **patients' medical records**
 - Add **diagnosis**, **treatments**, and **prescriptions**
