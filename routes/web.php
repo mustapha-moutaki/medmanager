@@ -66,9 +66,6 @@ Route::post('/logout', function () {
 // Route::get('/monthly-patient-data', [ChartController::class, 'getMonthlyPatientRegistrations'])
 //     ->name('patient.monthly.data');
 
-Route::get('/patient-chart', [ChartController::class, 'index'])->name('patient.chart');
-// -----------------------------------
-
 
 Route::get('/redirect', function () {
     return app(RedirectIfAuthenticated::class)->handle(request(), function () {});
@@ -105,12 +102,7 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])
 
 
 
-// fkdjgfgg
-
-// Route::middleware('role:Admin')->group(function () {
-//     Route::view('doctors', 'admin.doctors.index')->name('doctors');
-// });
-// Route::view('doctors', 'admin.doctors.index')->name('doctors');//  list doctors dashboard
+//meddelware
 Route::middleware(['role:admin'])->group(function () {
 
     Route::get('doctors', [DoctorController::class, 'index'])->name('doctors');
@@ -159,11 +151,6 @@ Route::post('/patients/{patient}/vitals', [VitalController::class, 'store'])->na
 
 
     //stuffs
-// Route::view('staffs', 'admin.staffs.index')->name('stuffs');
-// Route::view('staff/create', 'admin.staffs.create')->name('stuff.create');
-// Route::view('staff/edit', 'admin.staffs.edit')->name('stuff.edit');
-// Route::view('stuff/show', 'admin.staffs.show')->name('stuff.show');
-// Route::resource('staffs', StaffController::class);
 Route::get('staffs', [StaffController::class, 'index'])->name('stuffs');
 Route::get('staff/create', [StaffController::class, 'create'])->name('stuff.create');
 Route::post('staff', [StaffController::class, 'store'])->name('staff.store');
@@ -175,8 +162,7 @@ Route::delete('staff/{id}', [StaffController::class, 'destroy'])->name('stuff.de
 
 Route::view('patients/billing', 'admin.billings.show')->name('patientbillingshow');
 
-    //appointemtns
-// Route::view('patients/appointments', 'admin.appointments.index')->name('appointments-list');
+
 //appointments
 Route::get('appointments', [BusinessHourController::class, 'index'])->name('businessHour-list');
 Route::post('appointments', [BusinessHourController::class, 'update'])->name('businessHour.update');
@@ -188,9 +174,6 @@ Route::post('/appointments/reserve', [AppointmentController::class, 'reserve'])-
 Route::delete('/appointment/cancel',  [AppointmentController::class, 'destroy'])->name('reserve.cancel');
 
 
-// Route::view('patients/appointments/create', 'admin.appointments.create')->name('appointment.create');
-// Route::view('patients/appointments/show', 'admin.appointments.show')->name('appointment.show');
-// Route::view('patients/appointments/edit', 'admin.appointments.edit')->name('appointment.edit');
 
     //recordes
 Route::view('patient-recordes-list', 'admin.patient-recordes.index')->name('recordes.index');
@@ -216,19 +199,6 @@ Route::get('/admin/dashboard', [AdminController::class, 'index'])
     });
 
   
-// Route::middleware(['auth', 'role:patient'])->group(function () {
-//     // Route::get('/patient', [UserController::class, 'index'])->name('patient.dashboard');
-//     Route::get('/dashboard', [PatientController::class, 'dashboard'])->name('patient.dashboard');
-
-// });
-
-
-// Route::middleware([RoleMiddleware::class . ':patient'])->group(function () {
-//     Route::get('/patient', [UserController::class, 'index'])->name('patient.dashboard');
-// });
-// Route::middleware([RoleMiddleware::class . ':User'])->group(function () {
-//     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
-// });
 Route::get("/mail",function (){
     try{
         Mail::to("jawadboulmal@gmail.com")->send(new testMail());

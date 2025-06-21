@@ -104,7 +104,7 @@ class StaffController extends Controller
     $staff = Staff::findOrFail($id);
     
     // Validate the input data
-    $validatedData = $request->validate([
+  $request->validate([
         'first_name' => 'sometimes|string|max:255',
         'last_name' => 'sometimes|string|max:255',
         'phone' => 'sometimes|string|max:20',
@@ -128,7 +128,6 @@ class StaffController extends Controller
         $profilePhoto = $photoPath;
     }
     
-    // Create user data array with correct field names
     // Create user data array with correct field names
         $userData = [
             'first_name' => $request->first_name,
