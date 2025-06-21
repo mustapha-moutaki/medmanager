@@ -3,7 +3,7 @@
 A full-featured Laravel-based Hospital Management System designed to streamline administrative, medical, and patient operations in a modern healthcare environment.
 
 ---
-
+![Image](https://github.com/user-attachments/assets/deb8de42-0d02-4690-b518-614538c9054e)
 ## 🚀 Features
 
 ### 👨‍💼 Admin Dashboard
