@@ -2,8 +2,9 @@
 
 A full-featured Laravel-based Hospital Management System designed to streamline administrative, medical, and patient operations in a modern healthcare environment.
 
+[![Image](https://github.com/user-attachments/assets/deb8de42-0d02-4690-b518-614538c9054e)](https://github.com/user-attachments/assets/df9a851f-878e-4014-b88f-a4690ea7a99f)
+
 ---
-![Image](https://github.com/user-attachments/assets/deb8de42-0d02-4690-b518-614538c9054e)
 ## 🚀 Features
 
 ### 👨‍💼 Admin Dashboard
@@ -12,12 +13,13 @@ A full-featured Laravel-based Hospital Management System designed to streamline 
 - View statistics and activity logs
 - Control access roles and permissions
 
-- ![Image](https://github.com/user-attachments/assets/345791fa-5bfd-4a63-a072-395073db9d4c)
 
 ### 👨‍⚕️ Doctors
 - View and manage assigned **patients' medical records**
 - Add **diagnosis**, **treatments**, and **prescriptions**
 - Schedule appointments
+
+![Image](https://github.com/user-attachments/assets/86a78ac3-e861-4ded-8d0e-30f039b3845a)
 
 ### 👩‍⚕️ Nurses
 - Access patient details assigned to their care
@@ -34,6 +36,8 @@ A full-featured Laravel-based Hospital Management System designed to streamline 
 - View their **personal medical history**
 - Download **medical bills** and visit summaries
 - Receive doctor prescriptions and recommendations
+
+- ![Image](https://github.com/user-attachments/assets/345791fa-5bfd-4a63-a072-395073db9d4c)
 
 ---
 
