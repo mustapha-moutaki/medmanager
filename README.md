@@ -53,11 +53,17 @@ A full-featured Laravel-based Hospital Management System designed to streamline 
 
 ---
 
-## 📷 Screenshots
+## 🧠 System Design
 
-> _Add screenshots of your dashboard, bill generator, or patient portal here_
+> ✅ Use Case Diagram(patient, medicalAssistant, doctor)
+<img width="7456" alt="Image" src="https://github.com/user-attachments/assets/aff420b2-fc9c-4001-ba27-528a33f649ca" />
+
+> ✅ Class Diagram
+![Image](https://github.com/user-attachments/assets/d4e7b782-3e9d-4beb-aade-2a31ee4c344b)
 
 ---
+### please don't fogot to check uml folder for more details
+
 
 ## ⚙️ Installation
 
